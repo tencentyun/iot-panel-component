@@ -7,6 +7,7 @@ export default {
       rules: [],
     },
   },
+  base: '/iot-panel-component/',
   description: '腾讯连连标准组件库',
   styles: ['.__dumi-default-device{width: 375px!important; transform: scale(0.75); background: #6697f6}']
 }
