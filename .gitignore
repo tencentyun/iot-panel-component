@@ -1,0 +1,12 @@
+dist/
+.temp/
+.rn_temp/
+node_modules/
+.DS_Store
+.idea
+yarn-error.log
+*.icloud
+.npmrc
+*.tgz
+lib/
+.umi
