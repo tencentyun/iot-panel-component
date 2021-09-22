@@ -7,7 +7,7 @@ const { Slider }
   = process.env.TARO_ENV === 'weapp'
     ? require('@tarojs/components')
     : require('../components/slider');
-console.log(Slider);
+
 export interface NumberSliderProps{
   templateInfo?: Record<string, any>;
   /**
@@ -90,6 +90,7 @@ export function NumberSlider({
             }}
             onChange={(e) => {
               setValue(e.detail.value);
+              onChange(id, e.detail.value);
             }}
             style={{
               marginLeft: 0,

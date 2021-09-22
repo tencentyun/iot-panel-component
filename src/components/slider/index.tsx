@@ -169,7 +169,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     const value = this.countValue(percent);
 
     if (value === this.state.value) return;
-
+    e.persist();
     this.setState(
       {
         percent,
@@ -193,7 +193,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     }
 
     const { onChange } = this.props;
-
+    e.persist();
     this.setState({
       touching: false,
       ogX: 0,
