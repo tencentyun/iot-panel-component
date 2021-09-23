@@ -2,7 +2,7 @@
 ## H5 使用
 
 ```bash
-yarn add @tencent/iot-panel-component
+yarn add qcloud-iot-panel-component
 ```
 
 开始引用组件：
@@ -11,9 +11,9 @@ yarn add @tencent/iot-panel-component
 /* panel.tsx */
 
 // 引入组件库的css
-import '@tencent/iot-panel-component/lib/index.css';
+import 'qcloud-iot-panel-component/lib/index.css';
 
-import { BoolWidget } from '@tencent/iot-panel-component';
+import { BoolWidget } from 'qcloud-iot-panel-component';
 ```
 
 
@@ -37,9 +37,9 @@ import { BoolWidget } from '@tencent/iot-panel-component';
 
 ```ts
 // 引入组件库的css
-import '@tencent/iot-panel-component/lib/index.css';
+import 'qcloud-iot-panel-component/lib/index.css';
 
-import { BoolWidget } from '@tencent/iot-panel-component';
+import { BoolWidget } from 'qcloud-iot-panel-component';
 
 ```
 

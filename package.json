@@ -1,6 +1,6 @@
 {
-  "name": "@tencent/iot-panel-component",
-  "version": "0.0.2",
+  "name": "qcloud-iot-panel-component",
+  "version": "0.0.2-alpha.0",
   "description": "腾讯连连开发面板组件",
   "main": "lib/index.js",
   "scripts": {

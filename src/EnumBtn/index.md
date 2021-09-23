@@ -7,7 +7,7 @@
  * background: '6697f6'
  */
 import React, {useState} from 'react';
-import { EnumBtn } from '@tencent/iot-panel-component';
+import { EnumBtn } from 'qcloud-iot-panel-component';
 const [enumVal, setEnumVal] = useState(0);
 const enumList = [
   {text: 'x', value: 0},

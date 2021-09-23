@@ -6,7 +6,7 @@
 
 ```jsx
 import React from 'react';
-import { BoolWidget } from '@tencent/iot-panel-component';
+import { BoolWidget } from 'qcloud-iot-panel-component';
 export default () => (<div>
   <BoolWidget title="这个是开关" />
   <BoolWidget title="小开关" size="small" />

@@ -6,7 +6,7 @@
 
 ```tsx
 import React, {useState} from 'react';
-import { EnumSlider } from '@tencent/iot-panel-component';
+import { EnumSlider } from 'qcloud-iot-panel-component';
 const [enumVal, setEnumVal] = useState(0);
 const enumList = [
   {text: '温馨', value: 0},

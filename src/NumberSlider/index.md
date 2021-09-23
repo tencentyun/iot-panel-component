@@ -4,7 +4,7 @@
 
 ```tsx
 import React, {useState} from 'react';
-import { NumberSlider } from '@tencent/iot-panel-component';
+import { NumberSlider } from 'qcloud-iot-panel-component';
 
 export default () => <NumberSlider
   value={10}
