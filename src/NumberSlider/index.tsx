@@ -9,7 +9,7 @@ const { Slider }
     : require('../components/slider');
 
 export interface NumberSliderProps{
-  templateInfo?: Record<string, any>;
+  templateInfo?: TemplatePropertyConfig;
   /**
    * @description 要操作的值
    */

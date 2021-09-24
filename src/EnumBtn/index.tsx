@@ -18,11 +18,13 @@ export interface EnumBtnProps<T> {
    * @description 所有枚举项
    */
   enumList: EnumItem<T>[];
+  title?: string;
+  icon?: string;
   onChange?: (value: T) => void
 }
 
 export function EnumBtn<T>(props: EnumBtnProps<T>) {
-  const { value, enumList = [], onChange = noop } = props;
+  const { value, enumList = [], title = '', onChange = noop } = props;
 
   const chunkOpts = useMemo(() => {
     const firstLine = enumList.length % 4;
@@ -31,24 +33,32 @@ export function EnumBtn<T>(props: EnumBtnProps<T>) {
   }, [enumList]);
 
   return (
-    <div className="iotp-enum-btn-group">
-      {
-        chunkOpts.map((row: EnumItem<T>[], index) => <div className="enum-row" key={index}>
-          {row.map(({ value: itemValue, text, icon }) => (
-            <div
-              className={classNames('enum-item', { actived: value === itemValue })}
-              onClick={() => onChange(itemValue)}
-              key={text}
-            >
-              <button className="enum-btn">
-                {icon ? <img src={icon} className="panel-icon"/> : <DefaultIcon actived={value === itemValue}/>}
-              </button>
-              <span className="enum-title">{text}</span>
-            </div>
-          ))
+    <div className="iotp-enum-btn">
+      {title && (
+        <div className="iotp-enum-btn-title">
+          <DefaultIcon />
+          <span>{title}</span>
+        </div>
+      )}
+      <div className="iotp-enum-btn-group">
+        {
+          chunkOpts.map((row: EnumItem<T>[], index) => <div className="enum-row" key={index}>
+            {row.map(({ value: itemValue, text, icon }) => (
+              <div
+                className={classNames('enum-item', { actived: value === itemValue })}
+                onClick={() => onChange(itemValue)}
+                key={text}
+              >
+                <button className="enum-btn">
+                  {icon ? <img src={icon} className="panel-icon"/> : <DefaultIcon actived={value === itemValue}/>}
+                </button>
+                <span className="enum-title">{text}</span>
+              </div>
+            ))
+          }
+          </div>)
         }
-        </div>)
-      }
+      </div>
     </div>
   );
 }
