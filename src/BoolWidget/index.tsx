@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import './style.less';
-import { DefaultIcon } from '../components/DefaultIcon';
+import { Icon } from '../components/Icon';
 const { Switch } = process.env.TARO_ENV === 'weapp' ? require('@tarojs/components') : require('../components/switch');
 
 interface BoolWidgetProps {
@@ -15,7 +15,7 @@ interface BoolWidgetProps {
   size?: 'small' | 'normal',
   value: boolean;
   title?: string;
-  iconUrl?: string;
+  icon?: string;
   disabled?: boolean;
   onChange?: (value: boolean) => void
 }
@@ -26,15 +26,17 @@ export function BoolWidget(props: BoolWidgetProps) {
     title,
     value,
     size = 'normal',
-    iconUrl,
+    icon,
     onChange,
     disabled = false,
   } = props;
 
   return (
     <div className={classNames('iotp-bool-widget', { small: size === 'small' })}>
-      {size === 'normal' && <>{iconUrl ? <img src={iconUrl} /> : <DefaultIcon />}</>}
-      <div className="title">{title}</div>
+      <div className="iotp-bool-widget-title">
+        {size === 'normal' && <Icon icon={icon}/>}
+        <span>{title}</span>
+      </div>
       <Switch color={switchColor} onChange={onChange} value={value} disabled={disabled} />
     </div>
   );

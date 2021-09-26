@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import './Card.less';
-import { IonIcon } from '../IonIcon';
+import { Icon } from '../Icon';
 import { Hoverable } from '../Hoverable';
 
 export interface CardProps extends StyledProps {
@@ -10,7 +10,7 @@ export interface CardProps extends StyledProps {
   // 否则渲染 title、desc 和 icon
   title?: string;
   desc?: string;
-  icon?: string | React.ReactNode;
+  icon?: string;
   direction?: 'row' | 'column';
   onClick?: () => void,
   disabled?: boolean;
@@ -40,15 +40,13 @@ export function Card({
       break;
   }
 
-  if (typeof icon === 'string') {
-    icon = (
-      <IonIcon
-        size={24}
-        icon={icon}
-        color={disabled ? '#A1A7B2' : '#15161A'}
-      />
-    );
-  }
+  icon = (
+    <Icon
+      size={24}
+      icon={icon}
+      color={disabled ? '#A1A7B2' : '#15161A'}
+    />
+  );
 
   if (!children) {
     children = (

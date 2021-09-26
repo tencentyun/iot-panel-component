@@ -12,14 +12,20 @@
   border-radius: 8px;
   justify-content: space-between;
   color: #000;
-  .title{
+  &-title{
     flex: 1;
     max-width: 50%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    display: flex;
+    font-size: 16px;
+    span{
+      margin-left: 8px;
+    }
   }
   &.small{
+    font-size: 14px;
     width: calc(50% - 32px);
   }
 }

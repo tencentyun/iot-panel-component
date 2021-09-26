@@ -10,12 +10,12 @@ import './index.less';
 export interface EnumPopupProps<T> extends EnumBtnProps<T> {
   onClose?: () => void;
   templateConfig: TemplatePropertyConfig;
-  disabled?: boolean
 }
 
 export function EnumPopup<T>({
   templateConfig,
   enumList,
+  icon,
   value,
   onChange = noop,
   onClose = noop,
@@ -30,7 +30,7 @@ export function EnumPopup<T>({
 
   return <>
     <Card
-      icon="create"
+      icon={icon}
       title={name}
       desc={(value as any).toString()}
       onClick={() => setVisible(!visible)}

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { noop } from '../utils';
 import './index.less';
 import classNames from 'classnames';
-
+import { Icon } from '../components/Icon';
 const { Slider }
   = process.env.TARO_ENV === 'weapp'
     ? require('@tarojs/components')
@@ -18,6 +18,7 @@ export interface NumberSliderProps{
   step: number // 增加的步长
   min: number // number的最小值
   max: number // number的最大值
+  icon?: string
   onChange?: (id: any, e: any) => void;
 }
 
@@ -25,6 +26,7 @@ export function NumberSlider({
   templateInfo,
   value: outerValue,
   onChange = noop,
+  icon,
   disabled: outerDisabled,
   min = 0,
   max = 0,
@@ -32,7 +34,6 @@ export function NumberSlider({
 }: NumberSliderProps) {
   let {
     id,
-    icon = 'https://iot-public-1256872341.cos.ap-guangzhou.myqcloud.com/bardqi/1631601618691.png',
     name,
     mode = '',
     define: { start = 0, unit = '' } = {},
@@ -55,15 +56,8 @@ export function NumberSlider({
       })}
     >
       <div className="slid-inner">
-        <div className="slid-header">
-          <img
-            src={icon}
-            style={{
-              width: '20px',
-              height: '20px',
-              opacity: disabled ? 0.3 : 1,
-            }}
-          />
+        <div className="iotp-slid-title">
+          <Icon icon={icon} />
           <div className="slid-name text-overflow">{name}</div>
         </div>
         <div className="slid-body">

@@ -11,13 +11,12 @@ export interface IonIconProps extends StyledProps {
 
 export function IonIcon({
   icon,
-  color,
+  color = '#000',
   size = 24,
   theme = 'md',
   style = {},
   className,
 }: IonIconProps) {
-  if (!color) color = '#fff';
 
   const iconSize = `${size}px`;
 

@@ -8,6 +8,7 @@ export function EnumSlider<T>({
   enumList: options,
   value,
   onChange = noop,
+  disabled,
 }: EnumBtnProps<T>) {
   const size = useMemo(() => ({
     textWidth: 100,
@@ -116,7 +117,7 @@ export function EnumSlider<T>({
     // 滚动完，重置为第二轮值的中间
     setCurrentPosition(state.currentValue, false);
 
-    onChange(state.currentValue);
+    !disabled && onChange(state.currentValue);
     return;
   };
 

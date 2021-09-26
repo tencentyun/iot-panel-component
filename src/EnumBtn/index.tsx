@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import thunk from 'lodash.chunk';
 import { noop } from '../../src/utils';
+import { Icon } from '../components/Icon';
 import { DefaultIcon } from '../components/DefaultIcon';
 import './index.less';
 export interface EnumItem<T> {
@@ -20,11 +21,12 @@ export interface EnumBtnProps<T> {
   enumList: EnumItem<T>[];
   title?: string;
   icon?: string;
-  onChange?: (value: T) => void
+  onChange?: (value: T) => void;
+  disabled?: boolean;
 }
 
 export function EnumBtn<T>(props: EnumBtnProps<T>) {
-  const { value, enumList = [], title = '', onChange = noop } = props;
+  const { value, enumList = [], title = '', onChange = noop, icon, disabled } = props;
 
   const chunkOpts = useMemo(() => {
     const firstLine = enumList.length % 4;
@@ -36,7 +38,7 @@ export function EnumBtn<T>(props: EnumBtnProps<T>) {
     <div className="iotp-enum-btn">
       {title && (
         <div className="iotp-enum-btn-title">
-          <DefaultIcon />
+          <Icon icon={icon} />
           <span>{title}</span>
         </div>
       )}
@@ -46,7 +48,7 @@ export function EnumBtn<T>(props: EnumBtnProps<T>) {
             {row.map(({ value: itemValue, text, icon }) => (
               <div
                 className={classNames('enum-item', { actived: value === itemValue })}
-                onClick={() => onChange(itemValue)}
+                onClick={() => { !disabled && onChange(itemValue); }}
                 key={text}
               >
                 <button className="enum-btn">
