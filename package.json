@@ -1,6 +1,6 @@
 {
   "name": "qcloud-iot-panel-component",
-  "version": "0.0.2-alpha.0",
+  "version": "0.0.3",
   "description": "腾讯连连开发面板组件",
   "main": "lib/index.js",
   "scripts": {
@@ -14,7 +14,10 @@
     "build": "rm -rf ./lib && cross-env NODE_ENV=production rollup -c && npm run build:tsc",
     "build:tsc": "tsc -p tsconfig.json --emitDeclarationOnly --skipLibCheck -d --outDir lib/"
   },
-  "keywords": ["iot", "device panel"],
+  "keywords": [
+    "iot",
+    "device panel"
+  ],
   "files": [
     "lib/**/*.js",
     "lib/**/*.css",
