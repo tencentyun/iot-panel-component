@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import './style.less';
 import { Icon } from '../components/Icon';
+import { noop } from '../utils';
 const { Switch } = process.env.TARO_ENV === 'weapp' ? require('@tarojs/components') : require('../components/switch');
 
 interface BoolWidgetProps {
@@ -27,7 +28,7 @@ export function BoolWidget(props: BoolWidgetProps) {
     value,
     size = 'normal',
     icon,
-    onChange,
+    onChange = noop,
     disabled = false,
   } = props;
 
@@ -37,7 +38,7 @@ export function BoolWidget(props: BoolWidgetProps) {
         {size === 'normal' && <Icon icon={icon}/>}
         <span>{title}</span>
       </div>
-      <Switch color={switchColor} onChange={onChange} value={value} disabled={disabled} />
+      <Switch color={switchColor} onChange={(e) => onChange(e.detail.value)} checked={Boolean(value)} disabled={disabled} />
     </div>
   );
 }

@@ -14,7 +14,6 @@ export function NumberInput({
   disabled: outerDisabled = false,
 }: NumberSliderProps) {
   let {
-    id,
     name,
     define: {
       start = 0, unit = '',
@@ -43,8 +42,9 @@ export function NumberInput({
               disabled={value <= min}
               onClick={() => {
                 if (!disabled) {
-                  setValue(value - step);
-                  onChange(id, value);
+                  const newVal = value - step;
+                  setValue(newVal);
+                  onChange(newVal);
                 }
               }}
             >-</button>
@@ -56,8 +56,9 @@ export function NumberInput({
               disabled={value >= max}
               onClick={() => {
                 if (!disabled) {
-                  setValue(value + step);
-                  onChange(id, value);
+                  const newVal = value + step;
+                  setValue(newVal);
+                  onChange(newVal);
                 }
               }}
               >+</button>

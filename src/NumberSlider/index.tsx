@@ -19,7 +19,7 @@ export interface NumberSliderProps{
   min: number // number的最小值
   max: number // number的最大值
   icon?: string
-  onChange?: (id: any, e: any) => void;
+  onChange?: (value: number) => void;
 }
 
 export function NumberSlider({
@@ -33,9 +33,7 @@ export function NumberSlider({
   step = 0,
 }: NumberSliderProps) {
   let {
-    id,
     name,
-    mode = '',
     define: { start = 0, unit = '' } = {},
   } = templateInfo || {};
   min = +min;
@@ -44,7 +42,7 @@ export function NumberSlider({
   step = +step;
   const [value, setValue] = useState(typeof outerValue === 'undefined' ? start : outerValue);
   useEffect(() => {
-    onChange(id, value);
+    onChange(value);
   }, [value]);
   const valueLeft = useMemo(() => ((value - min) * 100) / (max - min), [value]);
 
@@ -84,7 +82,7 @@ export function NumberSlider({
             disabled={disabled}
             onChange={(e) => {
               setValue(e.detail.value);
-              onChange(id, e.detail.value);
+              onChange(e.detail.value);
             }}
             style={{
               marginLeft: 0,

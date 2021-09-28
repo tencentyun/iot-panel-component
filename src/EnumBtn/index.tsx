@@ -48,7 +48,11 @@ export function EnumBtn<T>(props: EnumBtnProps<T>) {
             {row.map(({ value: itemValue, text, icon }) => (
               <div
                 className={classNames('enum-item', { actived: value === itemValue })}
-                onClick={() => { !disabled && onChange(itemValue); }}
+                onClick={() => {
+                  if (!disabled && itemValue !== value) {
+                    onChange(itemValue);
+                  }
+                }}
                 key={text}
               >
                 <button className="enum-btn">
