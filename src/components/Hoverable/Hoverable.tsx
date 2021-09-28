@@ -1,6 +1,6 @@
 import React, { forwardRef, useState, Ref, useEffect } from 'react';
 import classNames from 'classnames';
-
+import { noop } from '../../utils';
 export interface HoverableProps<P extends keyof JSX.IntrinsicElements>
   extends StyledProps {
 
@@ -20,6 +20,8 @@ export interface HoverableProps<P extends keyof JSX.IntrinsicElements>
 export type HoverablePropsType<
   P extends keyof JSX.IntrinsicElements
 > = JSX.IntrinsicElements[P] & HoverableProps<P>;
+
+const isTaro = process.env.TARO_ENV === 'weapp';
 
 function HoverableRaw<P extends keyof JSX.IntrinsicElements = 'span'>(
   props: HoverablePropsType<P>,
@@ -46,12 +48,13 @@ function HoverableRaw<P extends keyof JSX.IntrinsicElements = 'span'>(
     parent || 'div',
     {
       ref,
+      hoverClass,
       className: classNames(className, {
         [hoverClass]: !disabled && hover,
       }),
-      onTouchStart: () => !disabled && setHover(true),
-      onTouchMove: () => !disabled && setHover(false),
-      onTouchEnd: () => !disabled && setHover(false),
+      onTouchStart: isTaro ? noop : () => !disabled && setHover(true),
+      onTouchMove: isTaro ? noop : () => !disabled && setHover(false),
+      onTouchEnd: isTaro ? noop : () => !disabled && setHover(false),
       ...htmlProps,
     },
     children

@@ -12,7 +12,7 @@ const enumList = [
   {text: 'z', value: 2},
   {text: 'foo', value: 3},
   {text: 'bar', value: 4},
-  {text: 'bar', value: 5},
+  {text: 'baz', value: 5},
 ];
 
 export default () => (

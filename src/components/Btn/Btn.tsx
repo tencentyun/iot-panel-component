@@ -59,7 +59,7 @@ export function Btn({
 
   return (
     <Hoverable
-      className={classNames('btn',
+      className={classNames('iotp-btn',
         className,
         type ? `btn-${type}` : '',
         {
