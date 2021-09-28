@@ -17,6 +17,7 @@ export function EnumPopup<T>({
   enumList,
   icon,
   value,
+  title,
   onChange = noop,
   onClose = noop,
   disabled = false,
@@ -31,11 +32,11 @@ export function EnumPopup<T>({
   return <>
     <Card
       icon={icon}
-      title={name}
+      title={title || name}
       desc={(value as any).toString()}
       onClick={() => setVisible(!visible)}
       disabled={disabled}
-      className="iot-enum-popup"
+      className="iotp-enum-popup"
     />
     {Boolean(visible) && (
     <Modal

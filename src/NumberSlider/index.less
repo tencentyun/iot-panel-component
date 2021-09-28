@@ -1,15 +1,18 @@
-.iotp-slid-content {
+@import '../_style/var.less';
+
+.iotp-number-slide {
   color: #000;
   touch-action: none;
   font-size: 14px;
   background: #ffffff;
-  padding: 16px;
-  margin: 16px;
+  padding: @widgetPadding 0;
+  margin: @widgetMargin;
   border-radius: 15px;
   .iotp-slid-title{
     display: flex;
     font-size: 16px;
     margin-bottom: 20px;
+    padding-left: @widgetPadding;
     >span{
       margin-left: 10px;
     }
@@ -25,9 +28,8 @@
   }
 
   .slid-body .number-control-value {
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
-    letter-spacing: 1.17px;
     border: 0.5px solid #d9d9d9;
     background-color: #fff;
     border-radius: 26.5px;

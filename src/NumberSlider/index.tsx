@@ -27,7 +27,7 @@ export function NumberSlider({
   value: outerValue,
   onChange = noop,
   icon,
-  disabled: outerDisabled,
+  disabled,
   min = 0,
   max = 0,
   step = 0,
@@ -43,7 +43,6 @@ export function NumberSlider({
   start = +start;
   step = +step;
   const [value, setValue] = useState(typeof outerValue === 'undefined' ? start : outerValue);
-  const disabled = outerDisabled || mode.indexOf('w') === -1;
   useEffect(() => {
     onChange(id, value);
   }, [value]);
@@ -51,8 +50,8 @@ export function NumberSlider({
 
   return (
     <div
-      className={classNames('iotp-slid-content', {
-        disabled: outerDisabled, // 产品希望只读状态下也是有颜色的，适合特定情景下效果呈现
+      className={classNames('iotp-number-slide', {
+        disabled: disabled,
       })}
     >
       <div className="slid-inner">
@@ -82,6 +81,7 @@ export function NumberSlider({
             onChanging={(e) => {
               setValue(e.detail.value);
             }}
+            disabled={disabled}
             onChange={(e) => {
               setValue(e.detail.value);
               onChange(id, e.detail.value);

@@ -33,10 +33,10 @@ export function Card({
   let directionClass = '';
   switch (children ? '' : direction) {
     case 'row':
-      directionClass = 'card_row';
+      directionClass = 'iotp-card_row';
       break;
     case 'column':
-      directionClass = 'card_column';
+      directionClass = 'iotp-card_column';
       break;
   }
 
@@ -51,9 +51,9 @@ export function Card({
   if (!children) {
     children = (
       <>
-        { Boolean(icon) && <div className="card__icon">{icon}</div> }
-        <div className="card__title">{title}</div>
-        <div className="card__desc">{desc}</div>
+        { Boolean(icon) && <div className="iotp-card__icon">{icon}</div> }
+        <div className="iotp-card__title">{title}</div>
+        <div className="iotp-card__desc">{desc}</div>
       </>
     );
   }
@@ -62,7 +62,7 @@ export function Card({
     <div className={className}>
       <Hoverable
         className={classNames(
-          'card',
+          'iotp-card',
           'need-hover',
           directionClass,
           {

@@ -1,8 +1,11 @@
-.card {
+@import '../../_style/var.less';
+
+.iotp-card {
   background: #fff;
   border-radius: 8px;
   color: #15161A;
-  padding: 16px;
+  padding: @widgetPadding;
+  margin: @widgetMargin;
   overflow: hidden;
   box-sizing: border-box;
   &__icon {
@@ -27,41 +30,41 @@
   }
 }
 
-.card.card_disabled {
-  .card__title {
+.iotp-card.card_disabled {
+  .iotp-card__title {
     color: #A1A7B2;
   }
 }
 
-.card_row {
+.iotp-card_row {
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 52px;
 
-  .card__icon {
+  .iotp-card__icon {
     margin-right: 8px;
   }
 
-  .card__title {
+  .iotp-card__title {
     flex-grow: 1;
   }
 
-  .card__desc {
+  .iotp-card__desc {
     margin-left: 8px;
   }
 }
 
-.card_column {
+.iotp-card_column {
   display: flex;
   flex-direction: column;
   min-height: 110px;
 
-  .card__icon {
+  &__icon {
     margin-bottom: 12px;
   }
 
-  .card__desc {
+  &__desc {
     margin-top: 2px;
   }
 }
