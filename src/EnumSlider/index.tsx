@@ -50,8 +50,9 @@ export function EnumSlider<T>({
    * @returns number
    */
   const getOffsetByValue = (value, round = 2) => {
+    const idx = options.findIndex((opt) => opt.value === value);
     const baseOffset = options.length * size.textWidth * round - size.containerWidth / 2 + size.textWidth / 2;
-    return baseOffset + value * size.textWidth;
+    return baseOffset + idx * size.textWidth;
   };
 
   // 将当前激活元素对准在中间，并重置当前列表到正中间

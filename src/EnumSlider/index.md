@@ -7,14 +7,14 @@
 ```tsx
 import React, {useState} from 'react';
 import { EnumSlider } from 'qcloud-iot-panel-component';
-const [enumVal, setEnumVal] = useState(0);
+const [enumVal, setEnumVal] = useState('a');
 const enumList = [
-  {text: '温馨', value: 0},
-  {text: '读书', value: 1},
-  {text: '明亮', value: 2},
-  {text: '动感', value: 3},
-  {text: '安静', value: 4},
-  {text: '睡眠', value: 5},
+  {text: '温馨', value: 'a'},
+  {text: '读书', value: 'b'},
+  {text: '明亮', value: 'c'},
+  {text: '动感', value: 'd'},
+  {text: '安静', value: 'e'},
+  {text: '睡眠', value: 'f'},
 ];
 
 export default () => (

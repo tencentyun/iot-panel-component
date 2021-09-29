@@ -69,7 +69,7 @@ export default {
     image(),
     esbuild({
       include: /\.[jt]sx?$/,
-      target: 'esnext',
+      target: 'es2015',
       minify: isProd,
       jsx: 'transform',
       jsxFactory: 'React.createElement',
