@@ -56,7 +56,7 @@ export function EnumBtn<T>(props: EnumBtnProps<T>) {
                 key={text}
               >
                 <button className="enum-btn">
-                  {icon ? <img src={icon} className="panel-icon"/> : <DefaultIcon actived={value === itemValue}/>}
+                  {<Icon icon={icon} actived={value === itemValue}/>}
                 </button>
                 <span className="enum-title">{text}</span>
               </div>

@@ -10,7 +10,7 @@ import React, {useState} from 'react';
 import { EnumBtn } from 'qcloud-iot-panel-component';
 const [enumVal, setEnumVal] = useState(0);
 const enumList = [
-  {text: 'x', value: 0},
+  {text: 'x', value: 0, icon: 'create'},
   {text: 'y', value: 1},
   {text: 'z', value: 2},
   {text: 'foo', value: 3},

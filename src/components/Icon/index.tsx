@@ -11,11 +11,11 @@ export interface IconProps {
 }
 
 export function Icon(props: IconProps) {
-  const { icon, ...others } = props;
+  const { icon, actived, ...others } = props;
   if (!icon) {
-    return <DefaultIcon {...others }/>;
+    return <DefaultIcon {...others } actived={actived}/>;
   }
-
+  console.log(icon, isUrl(icon));
   if (typeof icon === 'string' && isUrl(icon)) {
     return <img
       src={icon}
@@ -26,5 +26,5 @@ export function Icon(props: IconProps) {
     />;
   }
 
-  return <IonIcon icon={icon} {...others} />;
+  return <IonIcon icon={icon} color={actived ? 'white' : 'black'} {...others} />;
 }
