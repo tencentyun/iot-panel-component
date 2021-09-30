@@ -6,7 +6,7 @@ import './index.less';
 
 export function EnumSlider<T>({
   enumList: options,
-  value,
+  value: outerValue,
   onChange = noop,
   disabled,
 }: EnumBtnProps<T>) {
@@ -14,6 +14,12 @@ export function EnumSlider<T>({
     textWidth: 100,
     containerWidth: 338,
   }), []);
+
+  const [value, setValue] = useState(outerValue);
+
+  useEffect(() => {
+    setValue(outerValue);
+  }, [outerValue]);
 
   const stateRef = useRef({
     dragging: false,
@@ -94,6 +100,9 @@ export function EnumSlider<T>({
 
   const handleTouchStart = (e) => {
     e.preventDefault();
+    if (outerValue !== value) {
+      return;
+    }
     stateRef.current.dragging = true;
     stateRef.current.touchStartX = e.touches[0].pageX;
     stateRef.current.touchStartOffsetLeft = stateRef.current.offsetLeft;
@@ -101,10 +110,12 @@ export function EnumSlider<T>({
   };
 
   const handleTouchMove = (e) => {
-    const {
-      pageX,
-    } = e.touches[0];
-    stateRef.current.offsetLeft = stateRef.current.touchStartOffsetLeft - pageX + stateRef.current.touchStartX;
+    if (stateRef.current.dragging) {
+      const {
+        pageX,
+      } = e.touches[0];
+      stateRef.current.offsetLeft = stateRef.current.touchStartOffsetLeft - pageX + stateRef.current.touchStartX;
+    }
   };
 
   // 修正偏移距离，使激活选项还在中间
@@ -114,12 +125,13 @@ export function EnumSlider<T>({
     // 先完成滚动动画100ms
     const round = Math.floor(stateRef.current.originalIndex / options.length) + 2;
     setCurrentPosition(state.currentValue, true, round);
+    if (!disabled && state.currentValue !== outerValue) {
+      onChange(state.currentValue);
+    }
     await delay(110);
     // 滚动完，重置为第二轮值的中间
     setCurrentPosition(state.currentValue, false);
-
-    !disabled && onChange(state.currentValue);
-    return;
+    setValue(state.currentValue);
   };
 
   return (
