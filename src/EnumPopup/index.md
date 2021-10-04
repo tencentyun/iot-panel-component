@@ -18,7 +18,7 @@ const enumList = [
 export default () => (
   <EnumPopup
     value={enumVal}
-    templateConfig={{name: 'bool弹窗'}}
+    templateConfig={{name: '枚举弹窗'}}
     enumList={enumList}
     onChange={(v) => {console.log(v); setEnumVal(v)} }
   />
