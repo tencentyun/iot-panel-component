@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import './style.less';
+import './index.less';
 import { Icon } from '../components/Icon';
 import { noop } from '../utils';
 const { Switch } = process.env.TARO_ENV === 'weapp' ? require('@tarojs/components') : require('../components/switch');

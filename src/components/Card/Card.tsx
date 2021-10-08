@@ -40,7 +40,7 @@ export function Card({
       break;
   }
 
-  icon = (
+  const presetIcon = (
     <Icon
       size={24}
       icon={icon}
@@ -51,7 +51,7 @@ export function Card({
   if (!children) {
     children = (
       <>
-        { Boolean(icon) && <div className="iotp-card__icon">{icon}</div> }
+        { Boolean(icon) && <div className="iotp-card__icon">{presetIcon}</div> }
         <div className="iotp-card__title">{title}</div>
         <div className="iotp-card__desc">{desc}</div>
       </>

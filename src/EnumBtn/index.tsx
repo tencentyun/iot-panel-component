@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import thunk from 'lodash.chunk';
 import { noop } from '../../src/utils';
 import { Icon } from '../components/Icon';
-import { DefaultIcon } from '../components/DefaultIcon';
 import './index.less';
 export interface EnumItem<T> {
   value: T;
