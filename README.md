@@ -13,6 +13,19 @@ yarn build #打包组件
 yarn docs
 ```
 
+在小程序中使用本地包时，可以执行以下命令：
+
+```bash
+
+# 在组件库目录
+yarn build
+yarn pack # 生成 qcloud-iot-panel-component-v0.0.xx.tgz
+
+# 在小程序目录下
+yarn add path/to/qcloud-iot-panel-component-v0.0.xx.tgz
+
+```
+
 ## H5 使用
 
 ```bash
