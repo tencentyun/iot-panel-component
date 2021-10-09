@@ -44,7 +44,6 @@ export function Card({
     <Icon
       size={24}
       icon={icon}
-      color={disabled ? '#A1A7B2' : '#15161A'}
     />
   );
 
@@ -53,7 +52,10 @@ export function Card({
       <>
         { Boolean(icon) && <div className="iotp-card__icon">{presetIcon}</div> }
         <div className="iotp-card__title">{title}</div>
-        <div className="iotp-card__desc">{desc}</div>
+        <div className="iotp-card__desc">
+          {desc}
+          <span className="iotp-card__ft"></span>
+        </div>
       </>
     );
   }

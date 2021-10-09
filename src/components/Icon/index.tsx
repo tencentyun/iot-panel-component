@@ -15,7 +15,7 @@ export function Icon(props: IconProps) {
   if (!icon) {
     return <DefaultIcon {...others } actived={actived}/>;
   }
-  console.log(icon, isUrl(icon));
+
   if (typeof icon === 'string' && isUrl(icon)) {
     return <img
       src={icon}

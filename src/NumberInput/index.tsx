@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.less';
 import classNames from 'classnames';
 import { NumberSliderProps } from '../NumberSlider';
@@ -23,8 +23,14 @@ export function NumberInput({
   max = +max;
   start = +start;
   step = +step;
-  const [value, setValue] = useState(typeof outerValue === 'undefined' ? start : outerValue);
+  const [value, setValue] = useState(outerValue === undefined ? start : outerValue);
   const disabled = outerDisabled;
+
+  useEffect(() => {
+    if (outerValue !== undefined) {
+      setValue(outerValue);
+    }
+  }, [outerValue]);
 
   return (
     <div

@@ -40,10 +40,18 @@ export function NumberSlider({
   max = +max;
   start = +start;
   step = +step;
-  const [value, setValue] = useState(typeof outerValue === 'undefined' ? start : outerValue);
+  const [value, setValue] = useState(outerValue === undefined ? start : outerValue);
+
   useEffect(() => {
     onChange(value);
   }, [value]);
+
+  useEffect(() => {
+    if (outerValue !== undefined) {
+      setValue(outerValue);
+    }
+  }, [outerValue]);
+
   const valueLeft = useMemo(() => ((value - min) * 100) / (max - min), [value]);
 
   return (
