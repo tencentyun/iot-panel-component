@@ -12,10 +12,14 @@ interface BoolWidgetProps {
   switchColor?: string;
   /**
    * @default 'normal'
+   * @description 控制组件的长度
    */
   size?: 'small' | 'normal',
   value: boolean;
   title?: string;
+  /**
+   * @description icon使用ionicons 4.x, 所有的icon名称在 https://github.com/tencentyun/iot-panel-component/blob/master/src/components/IonIcon/IonIcon.less
+   */
   icon?: string;
   disabled?: boolean;
   onChange?: (value: boolean) => void

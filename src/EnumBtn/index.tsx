@@ -18,6 +18,9 @@ export interface EnumBtnProps<T> {
    * @description 所有枚举项
    */
   enumList: EnumItem<T>[];
+  /**
+   * @description 可以提供标题和图标
+   */
   title?: string;
   icon?: string;
   onChange?: (value: T) => void;
