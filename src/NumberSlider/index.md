@@ -3,7 +3,7 @@
 ### Demo
 
 ```tsx
-import React, {useState} from 'react';
+import React from 'react';
 import { NumberSlider } from 'qcloud-iot-panel-component';
 
 export default () => <NumberSlider

@@ -3,21 +3,37 @@ import { noop } from '../utils';
 import './index.less';
 import classNames from 'classnames';
 import { Icon } from '../components/Icon';
+import { TemplatePropertyConfig } from '../interface';
 const { Slider }
   = process.env.TARO_ENV === 'weapp'
     ? require('@tarojs/components')
     : require('../components/slider');
 
 export interface NumberSliderProps{
+  /**
+   * @description 可以提供unit, name等信息
+   */
   templateInfo?: TemplatePropertyConfig;
   /**
    * @description 要操作的值
    */
   value: number
-  disabled?: boolean // 是否禁用
-  step: number // 增加的步长
-  min: number // number的最小值
-  max: number // number的最大值
+  /**
+   * @description 是否禁用
+   */
+  disabled?: boolean
+  /**
+   * @description 增加或减少的步长
+   */
+  step: number
+  /**
+   * @description number的最小值
+   */
+  min: number
+  /**
+   * @description number的最大值
+   */
+  max: number
   icon?: string
   onChange?: (value: number) => void;
 }
