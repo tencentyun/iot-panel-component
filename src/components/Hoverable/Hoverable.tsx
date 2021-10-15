@@ -1,5 +1,6 @@
 import React, { forwardRef, useState, Ref, useEffect } from 'react';
 import classNames from 'classnames';
+import { StyledProps } from '../../interface';
 import { noop } from '../../utils';
 export interface HoverableProps<P extends keyof JSX.IntrinsicElements>
   extends StyledProps {

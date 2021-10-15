@@ -1,7 +1,7 @@
 /**
  * 表示组件支持通过 className 和 style 进行样式定制
  */
- declare interface StyledProps {
+ export interface StyledProps {
   /**
    * 组件自定义类名
    */
@@ -13,7 +13,7 @@
   style?: React.CSSProperties;
 }
 
-declare interface TemplatePropertyConfig {
+export interface TemplatePropertyConfig {
   id: string;
   name: string;
   mode: string;

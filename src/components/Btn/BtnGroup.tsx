@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Btn, BtnOptions } from "./Btn";
-
+import { StyledProps } from '../../interface';
 import './BtnGroup.less';
 
 export interface BtnGroupProps extends StyledProps {

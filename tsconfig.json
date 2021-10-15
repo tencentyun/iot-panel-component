@@ -22,7 +22,7 @@
     "resolveJsonModule": true,
     "typeRoots": [
       "node_modules/@types",
-      "global.d.ts"
+      "src/interface.ts"
     ]
   },
   "exclude": [
@@ -30,8 +30,7 @@
     "dist"
   ],
   "include": [
-    "src",
-    "global.d.ts"
+    "src"
   ],
   "compileOnSave": false
 }

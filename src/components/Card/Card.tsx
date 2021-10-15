@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-
+import { StyledProps } from '../../interface';
 import './Card.less';
 import { Icon } from '../Icon';
 import { Hoverable } from '../Hoverable';
