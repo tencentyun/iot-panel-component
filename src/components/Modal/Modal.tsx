@@ -5,7 +5,7 @@ import { noop } from '../../utils';
 import { Hoverable } from '../Hoverable';
 import { ConfirmBtnGroup, ConfirmBtnGroupProps } from "../Btn";
 import './Modal.less';
-
+import { StyledProps } from '../../interface';
 export interface ModalProps extends StyledProps {
   visible: boolean;
   title?: string | React.ReactNode;

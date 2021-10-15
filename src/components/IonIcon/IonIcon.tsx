@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import { StyledProps } from '../../interface';
 import './IonIcon.less';
 
 export interface IonIconProps extends StyledProps {

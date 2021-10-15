@@ -1,6 +1,7 @@
 // .umirc.ts
 export default {
   // ...
+  logo: '/images/egg-fried.svg',
   themeConfig: {
     carrier: '中国移动', // title text at left on status bar of device
     hd: {
