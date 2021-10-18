@@ -33,7 +33,7 @@ import { BoolWidget } from 'qcloud-iot-panel-component';
   ],
 ```
 
-使用方法上，无需引入weui，其他使用方法与h5相同:
+使用方法上， 除上述配置外，其他使用方法与h5相同:
 
 ```ts
 // 引入组件库的css
