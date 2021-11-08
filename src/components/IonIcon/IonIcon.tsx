@@ -20,6 +20,7 @@ export function IonIcon({
 }: IonIconProps) {
 
   const iconSize = `${size}px`;
+  const NONE_ICON = 'none';
 
   return (
     <div
@@ -27,7 +28,7 @@ export function IonIcon({
       style={{
         color,
         fontSize: iconSize,
-        width: iconSize,
+        width: icon === NONE_ICON ? '0px' : iconSize,
         height: iconSize,
         lineHeight: iconSize,
         ...style,

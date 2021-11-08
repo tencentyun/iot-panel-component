@@ -1,15 +1,16 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { noop } from '../utils';
 import './index.less';
 import classNames from 'classnames';
 import { Icon } from '../components/Icon';
 import { TemplatePropertyConfig } from '../interface';
+
 const { Slider }
   = process.env.TARO_ENV === 'weapp'
-    ? require('@tarojs/components')
-    : require('../components/slider');
+  ? require('@tarojs/components')
+  : require('../components/slider');
 
-export interface NumberSliderProps{
+export interface NumberSliderProps {
   /**
    * @description 可以提供unit, name等信息
    */
@@ -70,6 +71,20 @@ export function NumberSlider({
 
   const valueLeft = useMemo(() => ((value - min) * 100) / (max - min), [value]);
 
+  const tagRef = useRef<HTMLDivElement>(null);
+  const tagOffset = useRef(0);
+
+  useEffect(() => {
+    if (process.env.TARO_ENV === 'weapp') {
+      (tagRef.current as any).getBoundingClientRect().then(res => {
+        tagOffset.current = res.width / 2;
+      });
+    } else {
+      // web获取tag的宽度
+      tagOffset.current = tagRef.current!.offsetWidth;
+    }
+  }, []);
+
   return (
     <div
       className={classNames('iotp-number-slide', {
@@ -78,14 +93,15 @@ export function NumberSlider({
     >
       <div className="slid-inner">
         <div className="iotp-slid-title">
-          <Icon icon={icon} />
+          <Icon icon={icon}/>
           <div className="slid-name text-overflow">{name}</div>
         </div>
         <div className="slid-body">
           <div
             className="number-control-value"
+            ref={tagRef}
             style={{
-              left: `${valueLeft}%`,
+              left: `calc(${valueLeft}% - ${tagOffset.current}px)`,
             }}
           >
             {name}:{value}
@@ -108,11 +124,11 @@ export function NumberSlider({
               setValue(e.detail.value);
               onChange(e.detail.value);
             }}
-            style={{
-              marginLeft: 0,
-              marginRight: 0,
-            }}
-          ></Slider>
+            // style={{
+            //   marginLeft: 0,
+            //   marginRight: 0,
+            // }}
+          />
         </div>
       </div>
     </div>
