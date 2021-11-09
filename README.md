@@ -1,4 +1,4 @@
-# iot-panel-component
+# qcloud-iot-panel-component
 
 腾讯连连标准面板组件库
 

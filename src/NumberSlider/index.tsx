@@ -60,10 +60,6 @@ export function NumberSlider({
   const [value, setValue] = useState(outerValue === undefined ? start : outerValue);
 
   useEffect(() => {
-    onChange(value);
-  }, [value]);
-
-  useEffect(() => {
     if (outerValue !== undefined) {
       setValue(outerValue);
     }
@@ -73,7 +69,6 @@ export function NumberSlider({
 
   const tagRef = useRef<HTMLDivElement>(null);
   const tagOffset = useRef(0);
-
   useEffect(() => {
     if (process.env.TARO_ENV === 'weapp') {
       (tagRef.current as any).getBoundingClientRect().then(res => {
