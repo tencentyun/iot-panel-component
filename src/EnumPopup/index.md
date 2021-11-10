@@ -19,7 +19,7 @@ export default () => (
   <EnumPopup
     value={enumVal}
     icon="create"
-    templateConfig={{name: '枚举弹窗'}}
+    templateConfig={{name: '枚举弹窗很长很长的内容6666777'}}
     enumList={enumList}
     onChange={(v) => {console.log(v); setEnumVal(v)} }
   />
