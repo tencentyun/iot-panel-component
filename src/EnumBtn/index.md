@@ -14,7 +14,7 @@ export default () => {
   const [title, setTitle] = useState('');
   const enumList = [
     {text: 'x', value: 0, icon: 'create'},
-    {text: 'y', value: 1},
+    {text: 'y', value: 1, icon: 'https://iotmarket-1256872341.cos.ap-guangzhou.myqcloud.com/market/100005124842/ac7a87fae6eab9a3c9ced7c464f43b70.png'},
     {text: 'z', value: 2},
     {text: 'foo', value: 3},
     {text: 'bar', value: 4},

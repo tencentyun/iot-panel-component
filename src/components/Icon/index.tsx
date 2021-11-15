@@ -20,8 +20,8 @@ export function Icon(props: IconProps) {
     return <img
       src={icon}
       style={{
-        width: props.size,
-        height: props.size,
+        width: props.size || 24,
+        height: props.size || 24,
       }}
     />;
   }

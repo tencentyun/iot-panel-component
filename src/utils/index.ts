@@ -4,6 +4,6 @@ export const delay = (timeout: number) => new Promise<void>(resolve => setTimeou
 
 
 export const isUrl = (url: string) => {
-  return /(http|https)?\/\/:.+/.test(url);
+  return /(http:|https:)?\/\/.+/.test(url);
 };
 

@@ -1,6 +1,6 @@
 {
   "name": "qcloud-iot-panel-component",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "description": "腾讯连连开发面板组件",
   "main": "lib/index.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "dev:comp": "rollup -c --watch",
     "dev:tsc": "tsc -p tsconfig.json --emitDeclarationOnly -d --outDir lib/ --skipLibCheck --watch",
     "build": "rm -rf ./lib && cross-env NODE_ENV=production rollup -c && npm run build:tsc",
-    "build:tsc": "tsc -p tsconfig.json --emitDeclarationOnly --skipLibCheck -d --outDir lib/"
+    "build:tsc": "tsc -p tsconfig.json --emitDeclarationOnly --skipLibCheck -d --outDir lib/",
+    "publish": "npm run build & npm publish"
   },
   "keywords": [
     "iot",
