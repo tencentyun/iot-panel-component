@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-operators */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import 'weui';
+import './index.less';
 import React from 'react';
 import { isNumber, isBoolean, isString, isFunction } from '../../utils/parse-type';
 import classNames from 'classnames';
@@ -81,8 +81,8 @@ interface SliderState {
 export class Slider extends React.Component<SliderProps, SliderState> {
   sliderInsRef: any
   static defaultProps: { max: number; min: number; step: number; showValue: boolean; disabled: boolean; value: number; };
-  constructor() {
-    super(...arguments);
+  constructor(props: SliderProps) {
+    super(props);
 
     parseType(this.props);
 
