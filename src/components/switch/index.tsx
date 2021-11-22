@@ -1,4 +1,4 @@
-import 'weui';
+import './index.less';
 import React from 'react';
 import omit from 'omit.js';
 import classNames from 'classnames';
@@ -21,8 +21,8 @@ interface SwitchProps {
 }
 
 export class Switch extends React.Component<SwitchProps, {checked: boolean}> {
-  constructor() {
-    super(...arguments);
+  constructor(props: SwitchProps) {
+    super(props);
     this.state = {
       checked: this.props.checked,
     };

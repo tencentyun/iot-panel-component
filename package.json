@@ -1,6 +1,6 @@
 {
   "name": "qcloud-iot-panel-component",
-  "version": "0.0.35",
+  "version": "0.0.37",
   "description": "腾讯连连开发面板组件",
   "main": "lib/index.js",
   "scripts": {
@@ -62,8 +62,7 @@
     "@tarojs/components": "^3.3.7",
     "classnames": "^2.3.1",
     "lodash.chunk": "^4.2.0",
-    "omit.js": "^2.0.2",
-    "weui": "^1.1.0"
+    "omit.js": "^2.0.2"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

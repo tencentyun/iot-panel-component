@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './index.less';
 import classNames from 'classnames';
 import { NumberSliderProps } from '../NumberSlider';
-import { noop } from '../utils';
+import { noop, arithmeticType, arithmetic } from '../utils';
 
 export function NumberInput({
   templateInfo,
@@ -24,7 +24,19 @@ export function NumberInput({
   start = +start;
   step = +step;
   const [value, setValue] = useState(outerValue === undefined ? start : outerValue);
-  const disabled = outerDisabled;
+  // const disabled = outerDisabled;
+  const calculation = (isAdd, number1, number2) => {
+    if(outerDisabled) return;
+    let value = arithmetic(isAdd? arithmeticType.add : arithmeticType.sub, number1, number2);
+    if (value < min) {
+      value = min;
+    }
+    if (value > max) {
+      value = max;
+    }
+    setValue(value);
+    onChange(value);
+  };
 
   useEffect(() => {
     if (outerValue !== undefined) {
@@ -47,11 +59,7 @@ export function NumberInput({
               className="iotp-panel-btn"
               disabled={value <= min}
               onClick={() => {
-                if (!disabled) {
-                  const newVal = value - step;
-                  setValue(newVal);
-                  onChange(newVal);
-                }
+                calculation(false, value, step);
               }}
             >-</button>
           </div>
@@ -61,11 +69,7 @@ export function NumberInput({
               className="iotp-panel-btn"
               disabled={value >= max}
               onClick={() => {
-                if (!disabled) {
-                  const newVal = value + step;
-                  setValue(newVal);
-                  onChange(newVal);
-                }
+                calculation(true, value, step);
               }}
               >+</button>
           </div>

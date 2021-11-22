@@ -1,4 +1,3 @@
-import 'weui';
 import React from 'react';
 import omit from 'omit.js';
 import classNames from 'classnames';
