@@ -12,8 +12,7 @@
     "dev:comp": "rollup -c --watch",
     "dev:tsc": "tsc -p tsconfig.json --emitDeclarationOnly -d --outDir lib/ --skipLibCheck --watch",
     "build": "rm -rf ./lib && cross-env NODE_ENV=production rollup -c && npm run build:tsc",
-    "build:tsc": "tsc -p tsconfig.json --emitDeclarationOnly --skipLibCheck -d --outDir lib/",
-    "publish": "npm run build & npm publish"
+    "build:tsc": "tsc -p tsconfig.json --emitDeclarationOnly --skipLibCheck -d --outDir lib/"
   },
   "keywords": [
     "iot",

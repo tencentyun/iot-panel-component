@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { noop } from '../utils';
+import { noop, getFloatDigit } from '../utils';
 import './index.less';
 import classNames from 'classnames';
 import { Icon } from '../components/Icon';
@@ -58,17 +58,18 @@ export function NumberSlider({
   start = +start;
   step = +step;
   const [value, setValue] = useState(outerValue === undefined ? start : outerValue);
+  const decimalLength = getFloatDigit(step);
 
   useEffect(() => {
-    if (outerValue !== undefined) {
+    if (outerValue !== undefined && outerValue <= max && outerValue >= min) {
       setValue(outerValue);
     }
   }, [outerValue]);
 
   const valueLeft = useMemo(() => ((value - min) * 100) / (max - min), [value]);
-
   const tagRef = useRef<HTMLDivElement>(null);
   const tagOffset = useRef(0);
+
   useEffect(() => {
     if (process.env.TARO_ENV === 'weapp') {
       (tagRef.current as any).getBoundingClientRect().then(res => {
@@ -99,7 +100,7 @@ export function NumberSlider({
               left: `calc(${valueLeft}% - ${tagOffset.current}px)`,
             }}
           >
-            {name}:{value}
+            {name}:{value.toFixed(decimalLength)}
             {unit}
           </div>
           <Slider

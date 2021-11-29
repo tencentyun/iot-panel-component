@@ -97,7 +97,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
       touchId: false,
       ogPercent: 0,
       percent: this.props.value
-        ? parseInt((this.props.value / (this.props.max - this.props.min) * 100).toString())
+        ? ((this.props.value - this.props.min) / (this.props.max - this.props.min) * 100)
         : 0,
     };
     this.handleTouchStart = this.handleTouchStart.bind(this);
@@ -119,7 +119,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
         nextProps.value <= this.props.max
         && nextProps.value >= this.props.min
       ) {
-        const percent = parseInt((nextProps.value / (this.props.max - this.props.min) * 100).toString());
+        const percent = (nextProps.value - this.props.min) / (this.props.max - this.props.min) * 100;
         this.setState({ value: nextProps.value, percent });
       }
     }
@@ -133,8 +133,8 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     } else if (percent === 0) {
       value = min;
     } else {
-      value = Math.round(percent * max / 100 / step);
-      value = Math.round(value * step);
+      value = Math.round(percent * (max - min) / 100 / step);
+      value = value * step + min;
     }
     return value;
   }
