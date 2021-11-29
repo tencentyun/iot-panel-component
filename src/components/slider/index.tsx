@@ -134,7 +134,12 @@ export class Slider extends React.Component<SliderProps, SliderState> {
       value = min;
     } else {
       value = Math.round(percent * max / 100 / step);
-      value = Math.round(value * step);
+      value = value * step;
+      if (value <= min) {
+        value = min;
+      } else if (value >= max) {
+        value = max;
+      }
     }
     return value;
   }
