@@ -61,7 +61,7 @@ export function NumberSlider({
   const decimalLength = getFloatDigit(step);
 
   useEffect(() => {
-    if (outerValue !== undefined) {
+    if (outerValue !== undefined && outerValue <= max && outerValue >= min) {
       setValue(outerValue);
     }
   }, [outerValue]);
