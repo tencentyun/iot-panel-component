@@ -95,7 +95,7 @@ export class ScrollView extends React.Component<ScrollViewProps> {
     this.handleScroll(this.props, true);
   }
 
-  componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps (nextProps) {
     this.handleScroll(nextProps);
   }
 

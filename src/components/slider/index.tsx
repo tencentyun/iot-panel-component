@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import './index.less';
 import React from 'react';
+import omit from 'omit.js';
 import { isNumber, isBoolean, isString, isFunction } from '../../utils/parse-type';
 import classNames from 'classnames';
 
@@ -113,7 +114,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.state.controlled) {
       if (
         nextProps.value <= this.props.max
@@ -251,7 +252,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
       marginLeft: `-${Math.floor(_blockSize / 2)}px`,
     };
     return (
-      <div className={cls} {...restProps} >
+      <div className={cls} {...omit(restProps, ['onChanging'])} >
         <div className='weui-slider'>
           <div className='weui-slider__inner' style={innerStyles} ref={c => (this.sliderInsRef = c)}>
             <div style={trackStyles} className='weui-slider__track' />
