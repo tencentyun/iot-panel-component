@@ -1,5 +1,6 @@
 /* eslint-disable react/display-name */
 import React from 'react';
+import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import { noop } from '../../utils';
 import { Hoverable } from '../Hoverable';
@@ -15,6 +16,10 @@ export interface ModalProps extends StyledProps {
   children?: React.ReactNode;
   containerClassName?: string;
   showBackBtn?: boolean;
+  /**
+   * @description 组件挂载节点，仅支持 web 端
+   */
+  popupContainer?: Element;
 }
 
 export function Modal({
@@ -28,9 +33,15 @@ export function Modal({
   containerClassName,
   style,
   showBackBtn = false,
+  popupContainer,
 }: ModalProps) {
+  const renderWithPortal = (reactNode) => {
+    return HTMLElement && (popupContainer instanceof HTMLElement)
+      ? ReactDOM.createPortal(reactNode, popupContainer)
+      : reactNode;
+  };
 
-  return (
+  return renderWithPortal((
     <div
       className={classNames(
         'modal-container',
@@ -73,7 +84,7 @@ export function Modal({
         {children}
       </div>
     </div>
-  );
+  ));
 }
 
 Modal.Body = ({ children }) => (
