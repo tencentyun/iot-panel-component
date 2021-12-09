@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import { noop, getFloatDigit } from '../utils';
 import './index.less';
 import classNames from 'classnames';
@@ -67,17 +67,22 @@ export function NumberSlider({
   }, [outerValue]);
 
   const valueLeft = useMemo(() => ((value - min) * 100) / (max - min), [value]);
-  const tagRef = useRef<HTMLDivElement>(null);
   const tagOffset = useRef(0);
-
-  useEffect(() => {
+  const tagRef = useCallback((nodeRef) => {
     if (process.env.TARO_ENV === 'weapp') {
-      (tagRef.current as any).getBoundingClientRect().then(res => {
-        tagOffset.current = res.width / 2;
-      });
+      // 解决获取clientRect可能为null的问题 https://github.com/NervJS/taro/issues/10242
+      setTimeout(() => {
+        (nodeRef as any).getBoundingClientRect().then(res => {
+          if (res !== null) {
+            tagOffset.current = res.width / 2;
+          }
+        });
+      }, 0);
     } else {
       // web获取tag的宽度
-      tagOffset.current = tagRef.current!.offsetWidth;
+      if (nodeRef !== null) {
+        tagOffset.current = nodeRef.offsetWidth / 2;
+      }
     }
   }, []);
 

@@ -40,7 +40,7 @@ export class Switch extends React.Component<SwitchProps, {checked: boolean}> {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.hasOwnProperty('checked')) {
       this.setState({
         checked: nextProps.checked,
