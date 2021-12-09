@@ -13,10 +13,15 @@ const { ScrollView } = process.env.TARO_ENV === 'weapp' ? require('@tarojs/compo
 export interface EnumPopupProps<T> extends EnumBtnProps<T> {
   onClose?: () => void;
   templateConfig: TemplatePropertyConfig;
+  /**
+   * @description 挂载弹窗内容的节点，仅支持 web 端
+   */
+  popupContainer?: Element;
 }
 
 export function EnumPopup<T>({
   templateConfig,
+  popupContainer,
   enumList,
   icon,
   value,
@@ -49,6 +54,7 @@ export function EnumPopup<T>({
       onClose={() => setVisible(false)}
       title={name}
       showBackBtn={false}
+      popupContainer={popupContainer}
     >
       <Modal.Body>
         <ScrollView scrollY={true}>
