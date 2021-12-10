@@ -1,6 +1,7 @@
 import React from 'react';
 import omit from 'omit.js';
 import classNames from 'classnames';
+import { ScrollView as ScrollViewTaro } from '@tarojs/components';
 import './index.css';
 
 function easeOutScroll (from = 0, to = 0, callback) {
@@ -79,7 +80,7 @@ interface ScrollViewProps {
 
 }
 
-export class ScrollView extends React.Component<ScrollViewProps> {
+class ScrollViewH5 extends React.Component<ScrollViewProps> {
   _scrollTop: number;
   _scrollLeft: number;
   container: any;
@@ -237,3 +238,5 @@ export class ScrollView extends React.Component<ScrollViewProps> {
     );
   }
 }
+
+export const ScrollView = process.env.TARO_ENV === 'weapp' ? ScrollViewTaro : ScrollViewH5;

@@ -4,6 +4,7 @@ import './index.less';
 import React from 'react';
 import omit from 'omit.js';
 import { isNumber, isBoolean, isString, isFunction } from '../../utils/parse-type';
+import { Slider as SliderTaro } from '@tarojs/components';
 import classNames from 'classnames';
 
 /**
@@ -54,6 +55,9 @@ function parseType(props) {
 
 interface SliderProps {
   value: number
+  /**
+   * @description 上限
+   */
   max: number
   min: number
   step: number
@@ -79,7 +83,8 @@ interface SliderState {
   percent: number
   ogPercent: number
 }
-export class Slider extends React.Component<SliderProps, SliderState> {
+
+class SliderH5 extends React.Component<SliderProps, SliderState> {
   sliderInsRef: any
   static defaultProps: { max: number; min: number; step: number; showValue: boolean; disabled: boolean; value: number; };
   constructor(props: SliderProps) {
@@ -276,7 +281,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
   }
 }
 
-Slider.defaultProps = {
+SliderH5.defaultProps = {
   max: 100,
   min: 0,
   step: 1,
@@ -284,3 +289,5 @@ Slider.defaultProps = {
   disabled: false,
   value: 0,
 };
+
+export const Slider = process.env.TARO_ENV === 'weapp' ? SliderTaro : SliderH5;

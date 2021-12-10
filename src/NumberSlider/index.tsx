@@ -2,13 +2,8 @@ import React, { useEffect, useMemo, useRef, useState, useCallback } from 'react'
 import { noop, getFloatDigit } from '../utils';
 import './index.less';
 import classNames from 'classnames';
-import { Icon } from '../components/Icon';
+import { Icon, Slider } from '../components';
 import { TemplatePropertyConfig } from '../interface';
-
-const { Slider }
-  = process.env.TARO_ENV === 'weapp'
-  ? require('@tarojs/components')
-  : require('../components/Slider');
 
 export interface NumberSliderProps {
   /**

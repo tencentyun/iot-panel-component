@@ -2,6 +2,7 @@ import './index.less';
 import React from 'react';
 import omit from 'omit.js';
 import classNames from 'classnames';
+import { Switch as SwitchTaro } from '@tarojs/components';
 
 const types = {
   switch: 'switch',
@@ -17,10 +18,10 @@ interface SwitchProps {
   onChange: (e: any) => void
   className?: string
   color?: string
-  type: 'switch' | 'checkbox'
+  type?: 'switch' | 'checkbox'
 }
 
-export class Switch extends React.Component<SwitchProps, {checked: boolean}> {
+class SwitchH5 extends React.Component<SwitchProps, {checked: boolean}> {
   constructor(props: SwitchProps) {
     super(props);
     this.state = {
@@ -77,3 +78,6 @@ export class Switch extends React.Component<SwitchProps, {checked: boolean}> {
     );
   }
 }
+
+
+export const Switch = process.env.TARO_ENV === 'weapp' ?  SwitchTaro : SwitchH5;

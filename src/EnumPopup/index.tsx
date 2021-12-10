@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import { EnumBtnProps } from '../EnumBtn';
 import { noop } from '../utils';
-import { Modal } from '../components/Modal';
-import { Hoverable } from '../components/Hoverable';
-import { Card } from '../components/Card';
+import { ScrollView, Card, Hoverable, Modal } from '../components';
 import { TemplatePropertyConfig } from '../interface';
 import './index.less';
 
-const { ScrollView } = process.env.TARO_ENV === 'weapp' ? require('@tarojs/components') : require('../components/ScrollView');
 
 export interface EnumPopupProps<T> extends EnumBtnProps<T> {
   onClose?: () => void;

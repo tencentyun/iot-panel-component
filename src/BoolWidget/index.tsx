@@ -1,9 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
 import './index.less';
-import { Icon } from '../components/Icon';
+import { Icon, Switch } from '../components';
 import { noop } from '../utils';
-const { Switch } = process.env.TARO_ENV === 'weapp' ? require('@tarojs/components') : require('../components/Switch');
+
 
 interface BoolWidgetProps {
   /**
