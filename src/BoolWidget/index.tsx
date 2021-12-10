@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import './index.less';
 import { Icon } from '../components/Icon';
 import { noop } from '../utils';
-const { Switch } = process.env.TARO_ENV === 'weapp' ? require('@tarojs/components') : require('../components/switch');
+const { Switch } = process.env.TARO_ENV === 'weapp' ? require('@tarojs/components') : require('../components/Switch');
 
 interface BoolWidgetProps {
   /**

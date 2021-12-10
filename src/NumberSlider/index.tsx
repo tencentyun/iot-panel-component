@@ -8,7 +8,7 @@ import { TemplatePropertyConfig } from '../interface';
 const { Slider }
   = process.env.TARO_ENV === 'weapp'
   ? require('@tarojs/components')
-  : require('../components/slider');
+  : require('../components/Slider');
 
 export interface NumberSliderProps {
   /**

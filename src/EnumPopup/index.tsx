@@ -8,7 +8,7 @@ import { Card } from '../components/Card';
 import { TemplatePropertyConfig } from '../interface';
 import './index.less';
 
-const { ScrollView } = process.env.TARO_ENV === 'weapp' ? require('@tarojs/components') : require('../components/scroll-view');
+const { ScrollView } = process.env.TARO_ENV === 'weapp' ? require('@tarojs/components') : require('../components/ScrollView');
 
 export interface EnumPopupProps<T> extends EnumBtnProps<T> {
   onClose?: () => void;
