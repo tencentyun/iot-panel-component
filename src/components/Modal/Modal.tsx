@@ -36,6 +36,9 @@ export function Modal({
   popupContainer,
 }: ModalProps) {
   const renderWithPortal = (reactNode) => {
+    if (process.env.TARO_ENV === 'weapp') {
+      return reactNode;
+    }
     return HTMLElement && (popupContainer instanceof HTMLElement)
       ? ReactDOM.createPortal(reactNode, popupContainer)
       : reactNode;
