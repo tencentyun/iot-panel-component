@@ -2,11 +2,6 @@ export const noop = () => null;
 
 export const delay = (timeout: number) => new Promise<void>(resolve => setTimeout(() => resolve(), timeout));
 
-
-export const isUrl = (url: string) => {
-  return /(http:|https:)?\/\/.+/.test(url);
-};
-
 export const isFloatNumber = (num:number | string) =>{
   return /\d.\d+/g.test(String(num));
 };

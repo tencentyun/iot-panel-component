@@ -28,3 +28,13 @@ export interface TemplatePropertyConfig {
   };
   required?: boolean;
 }
+
+export declare type ThemeColorType = 'primary' | 'success' | 'grey' | 'danger' | 'weak' | 'muted';
+export declare const ThemeColorMap: {
+    primary: string;
+    success: string;
+    grey: string;
+    danger: string;
+    weak: string;
+    muted: string;
+};
