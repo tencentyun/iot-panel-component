@@ -240,3 +240,5 @@ class ScrollViewH5 extends React.Component<ScrollViewProps> {
 }
 
 export const ScrollView = process.env.TARO_ENV === 'weapp' ? ScrollViewTaro : ScrollViewH5;
+
+export { ScrollViewTaro, ScrollViewH5 };

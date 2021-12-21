@@ -291,3 +291,5 @@ SliderH5.defaultProps = {
 };
 
 export const Slider = process.env.TARO_ENV === 'weapp' ? SliderTaro : SliderH5;
+
+export { SliderH5, SliderTaro };

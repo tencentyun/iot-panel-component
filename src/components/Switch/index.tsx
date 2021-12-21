@@ -81,3 +81,5 @@ class SwitchH5 extends React.Component<SwitchProps, {checked: boolean}> {
 
 
 export const Switch = process.env.TARO_ENV === 'weapp' ?  SwitchTaro : SwitchH5;
+
+export { SwitchH5, SwitchTaro };

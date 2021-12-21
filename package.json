@@ -1,6 +1,6 @@
 {
   "name": "qcloud-iot-panel-component",
-  "version": "0.0.39",
+  "version": "0.0.40",
   "description": "腾讯连连开发面板组件",
   "main": "lib/index.js",
   "scripts": {
@@ -43,9 +43,9 @@
     "cross-env": "^7.0.3",
     "dumi": "^1.1.28",
     "dumi-theme-mobile": "^1.1.11",
-    "esbuild": "^0.12.28",
     "esbuild-plugin-alias-path": "^0.2.3",
     "eslint-plugin-react": "^7.25.1",
+    "esbuild": "^0.12.28",
     "less": "^4.1.1",
     "postcss": "^8.3.6",
     "rollup": "^2.56.3",
