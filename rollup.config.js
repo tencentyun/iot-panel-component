@@ -19,10 +19,6 @@ const inputList = [
 
 const isProd = process.env.NODE_ENV === 'production';
 
-const resolveFile = function (filePath) {
-  return path.join(__dirname, '..', filePath);
-};
-
 const processLess = function (context, payload) {
   return new Promise((resolve, reject) => {
     less.render({
@@ -56,12 +52,20 @@ const processLess = function (context, payload) {
 
 export default {
   input: inputList,
-  output: {
-    dir: './lib',
-    format: 'cjs',
-    sourcemap: !isProd,
-    exports: 'auto',
-  },
+  output: [
+    {
+      dir: './lib',
+      format: 'cjs',
+      sourcemap: !isProd,
+      exports: 'auto',
+    },
+    {
+      dir: './es',
+      format: 'es',
+      sourcemap: !isProd,
+      exports: 'auto',
+    },
+  ],
   external: ['react', 'weui', 'classnames', 'lodash.chunk'],
   plugins: [
     multiInput(),
