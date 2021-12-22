@@ -3,6 +3,7 @@
   "version": "0.0.40",
   "description": "腾讯连连开发面板组件",
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "module": "es/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,7 +13,7 @@
     "dev": "concurrently \"npm run dev:comp \" \"npm run dev:tsc \"",
     "dev:comp": "rollup -c --watch",
     "dev:tsc": "tsc -p tsconfig.json --emitDeclarationOnly -d --outDir lib/ --skipLibCheck --watch",
-    "build": "rm -rf ./lib && cross-env NODE_ENV=production rollup -c && npm run build:tsc",
+    "build": "rm -rf ./lib ./es && cross-env NODE_ENV=production rollup -c && npm run build:tsc",
     "build:tsc": "tsc -p tsconfig.json --emitDeclarationOnly --skipLibCheck -d --outDir lib/"
   },
   "keywords": [
@@ -22,7 +23,8 @@
   "files": [
     "lib/**/*.js",
     "lib/**/*.css",
-    "lib/**/*.d.ts"
+    "lib/**/*.d.ts",
+    "es/*"
   ],
   "homepage": "https://github.com/tencentyun/iot-panel-component",
   "bugs": {

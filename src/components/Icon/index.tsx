@@ -5,7 +5,7 @@ import { IonIcon } from '../IonIcon';
 import { DefaultIcon } from '../DefaultIcon';
 import { ThemeColorMap, ThemeColorType, StyledProps } from '../../interface';
 
-import './Icon.less';
+import './index.less';
 
 export type IconType = 'ionicon' | 'tea' | 'raw';
 
