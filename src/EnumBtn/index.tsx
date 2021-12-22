@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import classNames from 'classnames';
+import { DefaultIcon } from '../components/DefaultIcon';
 import thunk from 'lodash.chunk';
 import { noop } from '../../src/utils';
 import { Icon } from '../components/Icon';
@@ -58,7 +59,11 @@ export function EnumBtn<T>(props: EnumBtnProps<T>) {
                 key={text}
               >
                 <button className="enum-btn">
-                  {<Icon icon={icon} actived={value === itemValue}/>}
+                  {
+                    icon
+                    ? <Icon icon={icon} color={value === itemValue ? '#fff' : '#000'}/>
+                    : <DefaultIcon actived={value === itemValue}/>
+                  }
                 </button>
                 <span className="enum-title">{text}</span>
               </div>

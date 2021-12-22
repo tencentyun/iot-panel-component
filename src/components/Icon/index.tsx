@@ -16,7 +16,6 @@ export interface IconProps extends StyledProps {
   size?: number;
   colorTheme?: ThemeColorType;
   style?: React.CSSProperties
-
   [propKey: string]: any;
 }
 
@@ -59,7 +58,7 @@ export function Icon({
       case 'raw':
         return (
           <img
-            className={classNames('explorer-icon', className)}
+            className={classNames('iotp-icon', className)}
             src={icon}
             style={{
               width: size,
@@ -80,7 +79,7 @@ export function Icon({
           />
         );
       default:
-        return <DefaultIcon />;
+        return <DefaultIcon {...iconProps}/>;
     }
   };
 
