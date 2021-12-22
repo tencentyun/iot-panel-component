@@ -66,7 +66,7 @@ export default {
       exports: 'auto',
     },
   ],
-  external: ['react', 'weui', 'classnames', 'lodash.chunk'],
+  external: ['react', 'weui', 'classnames', 'lodash.chunk', 'react-dom', 'is-url'],
   plugins: [
     multiInput(),
     commonjs(),
