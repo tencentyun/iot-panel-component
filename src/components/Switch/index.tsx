@@ -52,6 +52,7 @@ class SwitchH5 extends React.Component<SwitchProps, {checked: boolean}> {
   render() {
     const { type = 'switch', className, color } = this.props;
     const cls = classNames(
+      'iotp-switch',
       {
         [`weui-${parseType(type)}`]: true,
       },
