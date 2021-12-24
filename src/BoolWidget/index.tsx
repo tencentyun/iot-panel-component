@@ -18,6 +18,11 @@ interface BoolWidgetProps {
   value: boolean;
   title?: string;
   /**
+   * @description 副标题
+   */
+  description?: string,
+
+  /**
    * @description icon使用ionicons 4.x, 所有的icon名称在 https://github.com/tencentyun/iot-panel-component/blob/master/src/components/IonIcon/IonIcon.less
    */
   icon?: string;
@@ -29,6 +34,7 @@ export function BoolWidget(props: BoolWidgetProps) {
   const {
     switchColor = '#006EFF',
     title,
+    description = '',
     value,
     size = 'normal',
     icon,
@@ -38,9 +44,17 @@ export function BoolWidget(props: BoolWidgetProps) {
 
   return (
     <div className={classNames('iotp-bool-widget', { small: size === 'small' })}>
-      <div className="iotp-bool-widget-title">
+      <div className="iotp-bool-widget-hd">
         {size === 'normal' && <Icon icon={icon}/>}
-        <span>{title}</span>
+        <div className="content">
+          <div>{title}</div>
+          { description && (
+            <div className="iotp-bool-widget-desc">
+              {description}
+            </div>
+            )
+          }
+        </div>
       </div>
       <Switch color={switchColor} onChange={(e) => onChange(e.detail.value)} checked={Boolean(value)} disabled={disabled} />
     </div>
