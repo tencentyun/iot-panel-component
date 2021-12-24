@@ -1,11 +1,10 @@
-/* eslint-disable no-mixed-operators */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import './index.less';
 import React from 'react';
 import omit from 'omit.js';
 import { isNumber, isBoolean, isString, isFunction } from '../../utils/parse-type';
-import { Slider as SliderTaro } from '@tarojs/components';
 import classNames from 'classnames';
+
+let SliderComponent;
 
 /**
  * props 类型检测
@@ -53,135 +52,166 @@ function parseType(props) {
   if (onChanging) isFunction(onChanging) ? '' : throwErrorMsg('onChanging');
 }
 
-interface SliderProps {
-  value: number
-  /**
-   * @description 上限
-   */
-  max: number
-  min: number
-  step: number
-  disabled?: boolean
-  onChange?: (e: any) => void
-  onChanging?: (e: any) => void
-  name?: string,
-  className?: string,
-  showValue?: boolean,
-  backgroundColor?: string,
-  activeColor?: string,
-  blockColor?: string,
-  blockSize?: number,
-}
+if (process.env.TARO_ENV === 'weapp') {
+  const { Slider: SliderTaro } = require('@tarojs/components');
 
-interface SliderState {
-  value: number
-  controlled: boolean
-  touching: boolean
-  totalWidth: number
-  ogX: number
-  touchId: boolean
-  percent: number
-  ogPercent: number
-}
-
-class SliderH5 extends React.Component<SliderProps, SliderState> {
-  sliderInsRef: any
-  static defaultProps: { max: number; min: number; step: number; showValue: boolean; disabled: boolean; value: number; };
-  constructor(props: SliderProps) {
-    super(props);
-
-    parseType(this.props);
-
-    this.sliderInsRef = '';
-
-    this.state = {
-      value: Math.min(this.props.value, this.props.max),
-      controlled: typeof this.props.value !== 'undefined',
-      totalWidth: 0,
-      touching: false,
-      ogX: 0,
-      touchId: false,
-      ogPercent: 0,
-      percent: this.props.value
-        ? ((this.props.value - this.props.min) / (this.props.max - this.props.min) * 100)
-        : 0,
-    };
-    this.handleTouchStart = this.handleTouchStart.bind(this);
-    this.handleTouchMove = this.handleTouchMove.bind(this);
-    this.handleTouchEnd = this.handleTouchEnd.bind(this);
+  SliderComponent = SliderTaro;
+} else {
+  interface SliderProps {
+    value: number
+    /**
+     * @description 上限
+     */
+    max: number
+    min: number
+    step: number
+    disabled?: boolean
+    onChange?: (e: any) => void
+    onChanging?: (e: any) => void
+    name?: string,
+    className?: string,
+    showValue?: boolean,
+    backgroundColor?: string,
+    activeColor?: string,
+    blockColor?: string,
+    blockSize?: number,
   }
 
-  componentDidMount() {
-    if (this.state.value === 0) {
-      this.setState({
-        value: this.countValue(),
-      });
+  interface SliderState {
+    value: number
+    controlled: boolean
+    touching: boolean
+    totalWidth: number
+    ogX: number
+    touchId: boolean
+    percent: number
+    ogPercent: number
+  }
+
+  class SliderH5 extends React.Component<SliderProps, SliderState> {
+    sliderInsRef: any
+    static defaultProps: { max: number; min: number; step: number; showValue: boolean; disabled: boolean; value: number; };
+
+    constructor(props: SliderProps) {
+      super(props);
+
+      parseType(this.props);
+
+      this.sliderInsRef = '';
+
+      this.state = {
+        value: Math.min(this.props.value, this.props.max),
+        controlled: typeof this.props.value !== 'undefined',
+        totalWidth: 0,
+        touching: false,
+        ogX: 0,
+        touchId: false,
+        ogPercent: 0,
+        percent: this.props.value
+          ? ((this.props.value - this.props.min) / (this.props.max - this.props.min) * 100)
+          : 0,
+      };
+      this.handleTouchStart = this.handleTouchStart.bind(this);
+      this.handleTouchMove = this.handleTouchMove.bind(this);
+      this.handleTouchEnd = this.handleTouchEnd.bind(this);
     }
-  }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.state.controlled) {
-      if (
-        nextProps.value <= this.props.max
-        && nextProps.value >= this.props.min
-      ) {
-        const percent = (nextProps.value - this.props.min) / (this.props.max - this.props.min) * 100;
-        this.setState({ value: nextProps.value, percent });
+    componentDidMount() {
+      if (this.state.value === 0) {
+        this.setState({
+          value: this.countValue(),
+        });
       }
     }
-  }
 
-  countValue(percent = this.state.percent, min = this.props.min, max = this.props.max, step = this.props.step) {
-    let value = 0;
-
-    if (percent === 100) {
-      value = max;
-    } else if (percent === 0) {
-      value = min;
-    } else {
-      value = Math.round(percent * (max - min) / 100 / step);
-      value = value * step + min;
+    UNSAFE_componentWillReceiveProps(nextProps) {
+      if (this.state.controlled) {
+        if (
+          nextProps.value <= this.props.max
+          && nextProps.value >= this.props.min
+        ) {
+          const percent = (nextProps.value - this.props.min) / (this.props.max - this.props.min) * 100;
+          this.setState({ value: nextProps.value, percent });
+        }
+      }
     }
-    return value;
-  }
 
-  handleTouchStart(e) {
-    if (this.state.touching || this.props.disabled) return;
-    const barDOM = this.sliderInsRef;
-    this.setState({
-      touching: true,
-      touchId: e.targetTouches[0].identifier,
-      totalWidth: barDOM.clientWidth,
-      ogX: e.targetTouches[0].pageX,
-      ogPercent: this.state.percent,
-    });
-  }
+    countValue(percent = this.state.percent, min = this.props.min, max = this.props.max, step = this.props.step) {
+      let value = 0;
 
-  handleTouchMove(e) {
-    const { onChanging } = this.props;
-    if (!this.state.touching || this.props.disabled) return;
-    if (e.targetTouches[0].identifier !== this.state.touchId) return;
+      if (percent === 100) {
+        value = max;
+      } else if (percent === 0) {
+        value = min;
+      } else {
+        value = Math.round(percent * (max - min) / 100 / step);
+        value = value * step + min;
+      }
+      return value;
+    }
 
-    // 阻止默认事件
-    // e.preventDefault()
+    handleTouchStart(e) {
+      if (this.state.touching || this.props.disabled) return;
+      const barDOM = this.sliderInsRef;
+      this.setState({
+        touching: true,
+        touchId: e.targetTouches[0].identifier,
+        totalWidth: barDOM.clientWidth,
+        ogX: e.targetTouches[0].pageX,
+        ogPercent: this.state.percent,
+      });
+    }
 
-    const pageX = e.targetTouches[0].pageX;
-    const diffX = pageX - this.state.ogX;
+    handleTouchMove(e) {
+      const { onChanging } = this.props;
+      if (!this.state.touching || this.props.disabled) return;
+      if (e.targetTouches[0].identifier !== this.state.touchId) return;
 
-    let percent
-      = parseInt((diffX / this.state.totalWidth * 100).toString()) + this.state.ogPercent;
-    percent = percent < 0 ? 0 : percent > 100 ? 100 : percent;
+      // 阻止默认事件
+      // e.preventDefault()
 
-    const value = this.countValue(percent);
+      const pageX = e.targetTouches[0].pageX;
+      const diffX = pageX - this.state.ogX;
 
-    if (value === this.state.value) return;
-    e.persist();
-    this.setState(
-      {
-        percent,
-        value,
-      },
-      () => {
+      let percent
+        = parseInt((diffX / this.state.totalWidth * 100).toString()) + this.state.ogPercent;
+      percent = percent < 0 ? 0 : percent > 100 ? 100 : percent;
+
+      const value = this.countValue(percent);
+
+      if (value === this.state.value) return;
+      e.persist();
+      this.setState(
+        {
+          percent,
+          value,
+        },
+        () => {
+          Object.defineProperty(e, 'detail', {
+            enumerable: true,
+            value: {
+              detail: e.detail,
+              value: this.state.value,
+            },
+          });
+          if (onChanging) onChanging(e);
+        },
+      );
+    }
+
+    handleTouchEnd(e) {
+      if (!this.state.touching || this.props.disabled) {
+        return;
+      }
+
+      const { onChange } = this.props;
+      e.persist();
+      this.setState({
+        touching: false,
+        ogX: 0,
+        touchId: false,
+        ogPercent: 0,
+      }, () => {
         Object.defineProperty(e, 'detail', {
           enumerable: true,
           value: {
@@ -189,107 +219,84 @@ class SliderH5 extends React.Component<SliderProps, SliderState> {
             value: this.state.value,
           },
         });
-        if (onChanging) onChanging(e);
-      },
-    );
-  }
-  handleTouchEnd(e) {
-    if (!this.state.touching || this.props.disabled) {
-      return;
-    }
-
-    const { onChange } = this.props;
-    e.persist();
-    this.setState({
-      touching: false,
-      ogX: 0,
-      touchId: false,
-      ogPercent: 0,
-    }, () => {
-      Object.defineProperty(e, 'detail', {
-        enumerable: true,
-        value: {
-          detail: e.detail,
-          value: this.state.value,
-        },
+        if (onChange) onChange(e);
       });
-      if (onChange) onChange(e);
-    });
-  }
-
-  render() {
-    const {
-      name = '',
-      className,
-      showValue,
-      backgroundColor,
-      activeColor,
-      blockColor,
-      blockSize = 0,
-      ...restProps
-    } = this.props;
-    let _blockSize = blockSize;
-    const cls = classNames('weui-slider-box', className);
-
-    const innerStyles = {
-      backgroundColor,
-    };
-
-    const percent = this.state.percent > 100 ? 100 : this.state.percent;
-    const trackStyles = {
-      width: `${percent}%`,
-      backgroundColor: activeColor,
-    };
-
-    if (_blockSize < 12) {
-      _blockSize = 28;
-    }
-    if (_blockSize > 28) {
-      _blockSize = 28;
     }
 
-    const handlerStyles = {
-      left: `${percent}%`,
-      width: `${_blockSize}px`,
-      height: `${_blockSize}px`,
-      backgroundColor: blockColor,
-      marginTop: `-${Math.floor(_blockSize / 2)}px`,
-      marginLeft: `-${Math.floor(_blockSize / 2)}px`,
-    };
-    return (
-      <div className={cls} {...omit(restProps, ['onChanging'])} >
-        <div className='weui-slider'>
-          <div className='weui-slider__inner' style={innerStyles} ref={c => (this.sliderInsRef = c)}>
-            <div style={trackStyles} className='weui-slider__track' />
-            <div
-              style={handlerStyles}
-              onTouchStart={this.handleTouchStart}
-              onTouchMove={this.handleTouchMove}
-              onTouchEnd={this.handleTouchEnd}
-              className='weui-slider__handler'
-            />
-            <input type='hidden' name={name} value={this.state.value} />
+    render() {
+      const {
+        name = '',
+        className,
+        showValue,
+        backgroundColor,
+        activeColor,
+        blockColor,
+        blockSize = 0,
+        ...restProps
+      } = this.props;
+      let _blockSize = blockSize;
+      const cls = classNames('weui-slider-box', className);
+
+      const innerStyles = {
+        backgroundColor,
+      };
+
+      const percent = this.state.percent > 100 ? 100 : this.state.percent;
+      const trackStyles = {
+        width: `${percent}%`,
+        backgroundColor: activeColor,
+      };
+
+      if (_blockSize < 12) {
+        _blockSize = 28;
+      }
+      if (_blockSize > 28) {
+        _blockSize = 28;
+      }
+
+      const handlerStyles = {
+        left: `${percent}%`,
+        width: `${_blockSize}px`,
+        height: `${_blockSize}px`,
+        backgroundColor: blockColor,
+        marginTop: `-${Math.floor(_blockSize / 2)}px`,
+        marginLeft: `-${Math.floor(_blockSize / 2)}px`,
+      };
+      return (
+        <div className={cls} {...omit(restProps, ['onChanging'])} >
+          <div className='weui-slider'>
+            <div className='weui-slider__inner' style={innerStyles} ref={c => (this.sliderInsRef = c)}>
+              <div style={trackStyles} className='weui-slider__track'/>
+              <div
+                style={handlerStyles}
+                onTouchStart={this.handleTouchStart}
+                onTouchMove={this.handleTouchMove}
+                onTouchEnd={this.handleTouchEnd}
+                className='weui-slider__handler'
+              />
+              <input type='hidden' name={name} value={this.state.value}/>
+            </div>
           </div>
+          {showValue ? (
+            <div className='weui-slider-box__value'>{this.state.value}</div>
+          ) : (
+            false
+          )}
         </div>
-        {showValue ? (
-          <div className='weui-slider-box__value'>{this.state.value}</div>
-        ) : (
-          false
-        )}
-      </div>
-    );
+      );
+    }
   }
+
+  SliderH5.defaultProps = {
+    max: 100,
+    min: 0,
+    step: 1,
+    showValue: false,
+    disabled: false,
+    value: 0,
+  };
+
+  SliderComponent = SliderH5;
 }
 
-SliderH5.defaultProps = {
-  max: 100,
-  min: 0,
-  step: 1,
-  showValue: false,
-  disabled: false,
-  value: 0,
-};
-
-export const Slider = process.env.TARO_ENV === 'weapp' ? SliderTaro : SliderH5;
-
-export { SliderH5, SliderTaro };
+export const Slider = SliderComponent;

@@ -4,7 +4,6 @@ import './index.less';
 import { Icon, Switch } from '../components';
 import { noop } from '../utils';
 
-
 interface BoolWidgetProps {
   /**
    * @description 控制switch的颜色
