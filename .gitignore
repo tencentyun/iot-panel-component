@@ -9,5 +9,7 @@ yarn-error.log
 .npmrc
 *.tgz
 lib/
+h5/
+taro/
 es/
 .umi

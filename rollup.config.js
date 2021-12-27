@@ -1,11 +1,10 @@
-import less from 'less';
-import path from 'path';
 import commonjs from '@rollup/plugin-commonjs';
 import multiInput from 'rollup-plugin-multi-input';
 import esbuild from 'rollup-plugin-esbuild';
 import postcss from 'rollup-plugin-postcss';
 import image from '@rollup/plugin-image';
 import staticImport from 'rollup-plugin-static-import';
+import replace from '@rollup/plugin-replace';
 // ​import nodeResolve from '@rollup/plugin-node-resolve';
 
 const inputList = [
@@ -18,39 +17,33 @@ const inputList = [
 ];
 
 const isProd = process.env.NODE_ENV === 'production';
+const external = ['react', 'weui', 'classnames', 'lodash.chunk', 'react-dom', 'is-url'];
 
-const processLess = function (context, payload) {
-  return new Promise((resolve, reject) => {
-    less.render({
-      file: context,
-    }, (err, result) => {
-      if (!err) {
-        resolve(result);
-      } else {
-        reject(err);
-      }
-    });
+const basePlugins = [
+  multiInput(),
+  commonjs(),
+  image(),
+  esbuild({
+    include: /\.[jt]sx?$/,
+    target: 'es2015',
+    minify: false,
+    jsx: 'transform',
+    jsxFactory: 'React.createElement',
+    jsxFragment: 'React.Fragment',
+    tsconfig: 'tsconfig.json',
+  }),
+  postcss({
+    minimize: true,
+    extract: true,
+    sourceMap: true,
+    extensions: ['.sass', '.scss', '.css', '.less'],
+  }),
+  staticImport({
+    include: ['src/*.css'],
+  }),
+];
 
-    less.render(context, {})
-      .then(
-        (output) => {
-          // output.css = string of css
-          // output.map = string of sourcemap
-          // output.imports = array of string filenames of the imports referenced
-          if (output && output.css) {
-            resolve(output.css);
-          } else {
-            reject({});
-          }
-        },
-        (err) => {
-          reject(err);
-        },
-      );
-  });
-};
-
-export default {
+const baseConfig = {
   input: inputList,
   output: [
     {
@@ -59,36 +52,53 @@ export default {
       sourcemap: !isProd,
       exports: 'auto',
     },
+  ],
+  external,
+  plugins: basePlugins
+};
+
+const H5Config = {
+  input: inputList,
+  output: [
     {
-      dir: './es',
-      format: 'es',
+      dir: './h5',
+      format: 'cjs',
       sourcemap: !isProd,
       exports: 'auto',
     },
   ],
-  external: ['react', 'weui', 'classnames', 'lodash.chunk', 'react-dom', 'is-url'],
+  external,
   plugins: [
-    multiInput(),
-    commonjs(),
-    image(),
-    esbuild({
-      include: /\.[jt]sx?$/,
-      target: 'es2015',
-      minify: isProd,
-      jsx: 'transform',
-      jsxFactory: 'React.createElement',
-      jsxFragment: 'React.Fragment',
-      tsconfig: 'tsconfig.json',
-    }),
-    postcss({
-      minimize: true,
-      extract: true,
-      sourceMap: true,
-      extensions: ['.sass', '.scss', '.css', '.less'],
-      process: processLess,
-    }),
-    staticImport({
-      include: ['src/*.css'],
-    }),
-  ],
+    ...basePlugins,
+    replace({
+      preventAssignment: true,
+      values: {
+        'process.env.TARO_ENV': JSON.stringify('h5'),
+      }
+    })
+  ]
 };
+
+const TaroConfig = {
+  input: inputList,
+  output: [
+    {
+      dir: './taro',
+      format: 'cjs',
+      sourcemap: !isProd,
+      exports: 'auto',
+    },
+  ],
+  external,
+  plugins: [
+    ...basePlugins,
+    replace({
+      preventAssignment: true,
+      values: {
+        'process.env.TARO_ENV': JSON.stringify('weapp'),
+      }
+    })
+  ]
+};
+
+export default [baseConfig, H5Config, TaroConfig];

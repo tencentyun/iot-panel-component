@@ -4,7 +4,7 @@ import './index.less';
 import React from 'react';
 import omit from 'omit.js';
 import { isNumber, isBoolean, isString, isFunction } from '../../utils/parse-type';
-import { Slider as SliderTaro } from '@tarojs/components';
+
 import classNames from 'classnames';
 
 /**
@@ -290,6 +290,5 @@ SliderH5.defaultProps = {
   value: 0,
 };
 
-export const Slider = process.env.TARO_ENV === 'weapp' ? SliderTaro : SliderH5;
+export default SliderH5;
 
-export { SliderH5, SliderTaro };
