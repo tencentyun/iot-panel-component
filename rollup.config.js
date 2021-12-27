@@ -75,12 +75,12 @@ export default (env, argus) => {
         sourcemap: !isProd,
         exports: 'auto',
       },
-      {
-        dir: `./es/${platform}`,
-        format: 'es',
-        sourcemap: !isProd,
-        exports: 'auto',
-      },
+      // {
+      //   dir: `./es/${platform}`,
+      //   format: 'es',
+      //   sourcemap: !isProd,
+      //   exports: 'auto',
+      // },
     ],
     external: ['react', 'weui', 'classnames', 'lodash.chunk', 'react-dom', 'is-url'],
     plugins: [
