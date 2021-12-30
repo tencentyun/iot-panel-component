@@ -5,6 +5,9 @@ import postcss from 'rollup-plugin-postcss';
 import image from '@rollup/plugin-image';
 import staticImport from 'rollup-plugin-static-import';
 import replace from '@rollup/plugin-replace';
+import typescript from 'rollup-plugin-typescript2';
+import { terser } from "rollup-plugin-terser";
+import autoExternal from 'rollup-plugin-auto-external';
 // ​import nodeResolve from '@rollup/plugin-node-resolve';
 
 const inputList = [
@@ -21,17 +24,22 @@ const external = ['react', 'weui', 'classnames', 'lodash.chunk', 'react-dom', 'i
 
 const basePlugins = [
   multiInput(),
+  autoExternal(),
   commonjs(),
-  image(),
-  esbuild({
-    include: /\.[jt]sx?$/,
-    target: 'es2015',
-    minify: false,
-    jsx: 'transform',
-    jsxFactory: 'React.createElement',
-    jsxFragment: 'React.Fragment',
+  typescript({
     tsconfig: 'tsconfig.json',
+    exclude: ['*.d.ts'],
   }),
+  image(),
+  // esbuild({
+  //   include: /\.[jt]sx?$/,
+  //   target: 'es2015',
+  //   minify: false,
+  //   jsx: 'transform',
+  //   jsxFactory: 'React.createElement',
+  //   jsxFragment: 'React.Fragment',
+  //   tsconfig: 'tsconfig.json',
+  // }),
   postcss({
     minimize: true,
     extract: true,
@@ -41,6 +49,7 @@ const basePlugins = [
   staticImport({
     include: ['src/*.css'],
   }),
+  isProd && terser(),
 ];
 
 const baseConfig = {

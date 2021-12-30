@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Btn, BtnOptions } from "./Btn";
+import { Btn, BtnOptions } from './Btn';
 import { StyledProps } from '../../interface';
 import './BtnGroup.less';
 
@@ -30,7 +30,6 @@ export function BtnGroup({
   fixedBottom,
   background,
 }: BtnGroupProps) {
-
   return (
     <div
       className={classNames('btn-group',
@@ -47,14 +46,14 @@ export function BtnGroup({
       {Boolean(children)
         ? children
         : buttons.map((btnConfig, index) => (
-          <Btn {...btnConfig} key={index} />
+          <Btn {...btnConfig} key={index}/>
         ))
       }
     </div>
   );
 }
 
-export interface ConfirmBtnGroupProps {
+export interface ConfirmBtnGroupProps extends StyledProps {
   onCancel?: any;
   onConfirm?: any;
   confirmText?: string | React.ReactNode;
@@ -74,10 +73,13 @@ export function ConfirmBtnGroup({
   cancelText,
   cancelBtnType = 'cancel',
   cancelBtnDisabled,
+  style,
+  className,
 }: ConfirmBtnGroupProps) {
   return (
     <BtnGroup
-      className='confirm-btn-group'
+      className={classNames('confirm-btn-group', className)}
+      style={style}
     >
       {Boolean(cancelText) && (
         <Btn

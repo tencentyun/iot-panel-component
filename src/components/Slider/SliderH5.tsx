@@ -87,6 +87,7 @@ interface SliderState {
 class SliderH5 extends React.Component<SliderProps, SliderState> {
   sliderInsRef: any
   static defaultProps: { max: number; min: number; step: number; showValue: boolean; disabled: boolean; value: number; };
+
   constructor(props: SliderProps) {
     super(props);
 
@@ -193,6 +194,7 @@ class SliderH5 extends React.Component<SliderProps, SliderState> {
       },
     );
   }
+
   handleTouchEnd(e) {
     if (!this.state.touching || this.props.disabled) {
       return;
@@ -260,7 +262,7 @@ class SliderH5 extends React.Component<SliderProps, SliderState> {
       <div className={cls} {...omit(restProps, ['onChanging'])} >
         <div className='weui-slider'>
           <div className='weui-slider__inner' style={innerStyles} ref={c => (this.sliderInsRef = c)}>
-            <div style={trackStyles} className='weui-slider__track' />
+            <div style={trackStyles} className='weui-slider__track'/>
             <div
               style={handlerStyles}
               onTouchStart={this.handleTouchStart}
@@ -268,7 +270,7 @@ class SliderH5 extends React.Component<SliderProps, SliderState> {
               onTouchEnd={this.handleTouchEnd}
               className='weui-slider__handler'
             />
-            <input type='hidden' name={name} value={this.state.value} />
+            <input type='hidden' name={name} value={this.state.value}/>
           </div>
         </div>
         {showValue ? (

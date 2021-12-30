@@ -2,15 +2,18 @@ import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { DefaultIcon } from '../components/DefaultIcon';
 import thunk from 'lodash.chunk';
-import { noop } from '../../src/utils';
+import { noop } from '../utils';
 import { Icon } from '../components/Icon';
+import { StyledProps } from '../interface';
 import './index.less';
+
 export interface EnumItem<T> {
   value: T;
   icon?: string;
   text: string;
 }
-export interface EnumBtnProps<T> {
+
+export interface EnumBtnProps<T> extends StyledProps {
   /**
    * @description 对应枚举整型/枚举字符型
    */
@@ -28,9 +31,16 @@ export interface EnumBtnProps<T> {
   disabled?: boolean;
 }
 
-export function EnumBtn<T>(props: EnumBtnProps<T>) {
-  const { value, enumList = [], title = '', onChange = noop, icon, disabled } = props;
-
+export function EnumBtn<T>({
+  value,
+  enumList = [],
+  title = '',
+  onChange = noop,
+  icon,
+  disabled,
+  style,
+  className,
+}: EnumBtnProps<T>) {
   const chunkOpts = useMemo(() => {
     const firstLine = enumList.length % 4;
     const rest = thunk(enumList.slice(firstLine), 4);
@@ -38,10 +48,10 @@ export function EnumBtn<T>(props: EnumBtnProps<T>) {
   }, [enumList]);
 
   return (
-    <div className="iotp-enum-btn">
+    <div className={classNames('iotp-enum-btn', className)} style={style}>
       {title && (
         <div className="iotp-enum-btn-title">
-          <Icon icon={icon} />
+          <Icon icon={icon}/>
           <span>{title}</span>
         </div>
       )}
@@ -61,14 +71,14 @@ export function EnumBtn<T>(props: EnumBtnProps<T>) {
                 <button className="enum-btn">
                   {
                     icon
-                    ? <Icon icon={icon} color={value === itemValue ? '#fff' : '#000'}/>
-                    : <DefaultIcon actived={value === itemValue}/>
+                      ? <Icon icon={icon} color={value === itemValue ? '#fff' : '#000'}/>
+                      : <DefaultIcon actived={value === itemValue}/>
                   }
                 </button>
                 <span className="enum-title">{text}</span>
               </div>
             ))
-          }
+            }
           </div>)
         }
       </div>

@@ -3,20 +3,22 @@ import omit from 'omit.js';
 import classNames from 'classnames';
 import './index.css';
 
-function easeOutScroll (from = 0, to = 0, callback) {
+function easeOutScroll(from = 0, to = 0, callback) {
   if (from === to || typeof from !== 'number') {
     return;
   }
   const change = to - from;
   const dur = 500;
   const sTime = +new Date();
-  function linear (t, b, c, d) {
+
+  function linear(t, b, c, d) {
     // eslint-disable-next-line no-mixed-operators
     return c * t / d + b;
   }
+
   const isLarger = to >= from;
 
-  function step () {
+  function step() {
     from = linear(+new Date() - sTime, from, change, dur);
     if ((isLarger && from >= to) || (!isLarger && to >= from)) {
       callback(to);
@@ -25,9 +27,11 @@ function easeOutScroll (from = 0, to = 0, callback) {
     callback(from);
     requestAnimationFrame(step);
   }
+
   step();
 }
-function throttle (fn, delay) {
+
+function throttle(fn, delay) {
   let timer;
   return function (...arrs) {
     clearTimeout(timer);
@@ -36,14 +40,16 @@ function throttle (fn, delay) {
     }, delay);
   };
 }
-function scrollIntoView (id) {
+
+function scrollIntoView(id) {
   document.querySelector(`#${id}`)?.scrollIntoView({
     behavior: 'smooth',
     block: 'center',
     inline: 'start'
   });
 }
-function scrollVertical (top, isAnimation) {
+
+function scrollVertical(top, isAnimation) {
   if (isAnimation) {
     easeOutScroll(this._scrollTop, top, pos => {
       if (this.container) this.container.scrollTop = pos;
@@ -53,7 +59,8 @@ function scrollVertical (top, isAnimation) {
   }
   this._scrollTop = top;
 }
-function scrollHorizontal (left, isAnimation) {
+
+function scrollHorizontal(left, isAnimation) {
   if (isAnimation) {
     easeOutScroll(this._scrollLeft, left, pos => {
       if (this.container) this.container.scrollLeft = pos;
@@ -70,20 +77,20 @@ interface ScrollViewProps {
   onScrollToUpper?: (e: any) => void;
   onScrollToLower?: (e: any) => void
   onTouchMove?: (e: any) => void,
-  scrollX?:  number
+  scrollX?: number
   scrollY?: number;
   scrollTop?: number | string;
   scrollLeft?: number | string;
   lowerThreshold?: number;
   upperThreshold?: number;
-
 }
 
 class ScrollViewH5 extends React.Component<ScrollViewProps> {
   _scrollTop: number;
   _scrollLeft: number;
   container: any;
-  constructor (props) {
+
+  constructor(props) {
     super(props);
   }
 
@@ -91,15 +98,15 @@ class ScrollViewH5 extends React.Component<ScrollViewProps> {
     e.stopPropagation();
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.handleScroll(this.props, true);
   }
 
-  UNSAFE_componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.handleScroll(nextProps);
   }
 
-  handleScroll (props, isInit = false) {
+  handleScroll(props, isInit = false) {
     // scrollIntoView
     if (
       props.scrollIntoView
@@ -142,7 +149,7 @@ class ScrollViewH5 extends React.Component<ScrollViewProps> {
     }
   }
 
-  render () {
+  render() {
     const {
       className,
       onScroll,
@@ -176,16 +183,16 @@ class ScrollViewH5 extends React.Component<ScrollViewProps> {
       if (
         onScrollToLower
         && ((this.props.scrollY
-          && offsetHeight + scrollTop + lowerThreshold >= scrollHeight)
-          || (this.props.scrollX
-            && offsetWidth + scrollLeft + lowerThreshold >= scrollWidth))
+        && offsetHeight + scrollTop + lowerThreshold >= scrollHeight)
+        || (this.props.scrollX
+          && offsetWidth + scrollLeft + lowerThreshold >= scrollWidth))
       ) {
         onScrollToLower(e);
       }
       if (
         onScrollToUpper
         && ((this.props.scrollY && scrollTop <= upperThreshold)
-          || (this.props.scrollX && scrollLeft <= upperThreshold))
+        || (this.props.scrollX && scrollLeft <= upperThreshold))
       ) {
         onScrollToUpper(e);
       }
@@ -222,7 +229,7 @@ class ScrollViewH5 extends React.Component<ScrollViewProps> {
           this.container = container;
         }}
         {
-        ...omit(this.props, ['className', 'scrollTop', 'scrollLeft'])
+          ...omit(this.props, ['className', 'scrollTop', 'scrollLeft'])
         }
         className={cls}
         onScroll={_onScroll}
@@ -231,7 +238,7 @@ class ScrollViewH5 extends React.Component<ScrollViewProps> {
         }
         onLoad={e => {
           console.log('onload', e);
-        }} >
+        }}>
         {this.props.children}
       </div>
     );
