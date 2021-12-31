@@ -5,12 +5,14 @@ import thunk from 'lodash.chunk';
 import { noop } from '../../src/utils';
 import { Icon } from '../components/Icon';
 import './index.less';
+import { StyledProps } from '../interface';
 export interface EnumItem<T> {
   value: T;
   icon?: string;
   text: string;
 }
-export interface EnumBtnProps<T> {
+
+export interface EnumBtnProps<T> extends StyledProps {
   /**
    * @description 对应枚举整型/枚举字符型
    */
@@ -28,9 +30,16 @@ export interface EnumBtnProps<T> {
   disabled?: boolean;
 }
 
-export function EnumBtn<T>(props: EnumBtnProps<T>) {
-  const { value, enumList = [], title = '', onChange = noop, icon, disabled } = props;
-
+export function EnumBtn<T>({
+  enumList = [],
+  title = '',
+  onChange = noop,
+  value,
+  icon,
+  disabled,
+  className,
+  style
+}: EnumBtnProps<T>) {
   const chunkOpts = useMemo(() => {
     const firstLine = enumList.length % 4;
     const rest = thunk(enumList.slice(firstLine), 4);
@@ -38,7 +47,10 @@ export function EnumBtn<T>(props: EnumBtnProps<T>) {
   }, [enumList]);
 
   return (
-    <div className="iotp-enum-btn">
+    <div
+      className={classNames('iotp-enum-btn', className)}
+      style={style}
+    >
       {title && (
         <div className="iotp-enum-btn-title">
           <Icon icon={icon} />

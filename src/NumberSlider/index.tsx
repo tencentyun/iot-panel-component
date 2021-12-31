@@ -3,9 +3,9 @@ import { noop, getFloatDigit } from '../utils';
 import './index.less';
 import classNames from 'classnames';
 import { Icon, Slider } from '../components';
-import { TemplatePropertyConfig } from '../interface';
+import { StyledProps, TemplatePropertyConfig } from '../interface';
 
-export interface NumberSliderProps {
+export interface NumberSliderProps extends StyledProps {
   /**
    * @description 可以提供unit, name等信息
    */
@@ -43,6 +43,8 @@ export function NumberSlider({
   min = 0,
   max = 0,
   step = 0,
+  style,
+  className,
 }: NumberSliderProps) {
   let {
     name,
@@ -83,9 +85,12 @@ export function NumberSlider({
 
   return (
     <div
-      className={classNames('iotp-number-slide', {
-        disabled: disabled,
-      })}
+      className={classNames(
+        'iotp-number-slide',
+        className,
+        { disabled: disabled }
+      )}
+      style={style}
     >
       <div className="slid-inner">
         <div className="iotp-slid-title">

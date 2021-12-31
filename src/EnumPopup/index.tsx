@@ -23,6 +23,8 @@ export function EnumPopup<T>({
   icon,
   value,
   title,
+  style,
+  className,
   onChange = noop,
   onClose = noop,
   disabled = false,
@@ -41,7 +43,8 @@ export function EnumPopup<T>({
       desc={enumList.find((item) => item.value === value)?.text}
       onClick={() => setVisible(!visible)}
       disabled={disabled}
-      className="iotp-enum-popup"
+      className={classNames('iotp-enum-popup', className)}
+      style={style}
     />
     {Boolean(visible) && (
     <Modal

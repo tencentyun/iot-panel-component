@@ -3,9 +3,10 @@ import classNames from 'classnames';
 import './index.less';
 import { Icon, Switch } from '../components';
 import { noop } from '../utils';
+import { StyledProps } from '../interface';
 
 
-interface BoolWidgetProps {
+interface BoolWidgetProps extends StyledProps {
   /**
    * @description 控制switch的颜色
    */
@@ -40,10 +41,15 @@ export function BoolWidget(props: BoolWidgetProps) {
     icon,
     onChange = noop,
     disabled = false,
+    className,
+    style,
   } = props;
 
   return (
-    <div className={classNames('iotp-bool-widget', { small: size === 'small' })}>
+    <div
+      className={classNames('iotp-bool-widget', className, { small: size === 'small' })}
+      style={style}
+    >
       <div className="iotp-bool-widget-hd">
         {size === 'normal' && <Icon icon={icon}/>}
         <div className="content">

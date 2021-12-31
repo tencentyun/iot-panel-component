@@ -12,6 +12,8 @@ export function NumberInput({
   max = 0,
   step = 0,
   disabled: outerDisabled = false,
+  style,
+  className,
 }: NumberSliderProps) {
   let {
     name,
@@ -46,9 +48,13 @@ export function NumberInput({
 
   return (
     <div
-    className={classNames('iotp-number-input', {
-      disabled: outerDisabled, // 产品希望只读状态下也是有颜色的，适合特定情景下效果呈现
-    })}>
+      className={classNames(
+        'iotp-number-input',
+        className,
+        { disabled: outerDisabled }
+      )}
+      style={style}
+    >
       <div className="panel-inner">
         <div style={{ textAlign: 'center', color: '#a1a7b2' }}>
           <span>{name}</span>

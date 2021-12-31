@@ -9,6 +9,8 @@ export function EnumSlider<T>({
   value: outerValue,
   onChange = noop,
   disabled,
+  style,
+  className,
 }: EnumBtnProps<T>) {
   const size = useMemo(() => ({
     textWidth: 100,
@@ -135,7 +137,10 @@ export function EnumSlider<T>({
   };
 
   return (
-    <div className={classNames('scene-slider', 'iotp-enum-slider')}>
+    <div
+      className={classNames('scene-slider', 'iotp-enum-slider', className)}
+      style={style}
+    >
       <div
         className='scene-slider-container'
         onTouchStart={handleTouchStart}
