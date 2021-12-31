@@ -1,1 +1,1 @@
-export { Slider as default } from '@tarojs/components';
+export { Slider } from '@tarojs/components';

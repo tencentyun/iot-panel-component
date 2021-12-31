@@ -22,6 +22,8 @@ export function EnumPopup<T>({
   icon,
   value,
   title,
+  style,
+  className,
   onChange = noop,
   onClose = noop,
   disabled = false,

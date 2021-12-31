@@ -1,1 +1,1 @@
-export { Switch as default } from '@tarojs/components';
+export { Switch } from '@tarojs/components';

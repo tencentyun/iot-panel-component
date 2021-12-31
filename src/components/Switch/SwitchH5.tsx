@@ -80,4 +80,4 @@ class SwitchH5 extends React.Component<SwitchProps, {checked: boolean}> {
 }
 
 
-export default SwitchH5;
+export { SwitchH5 as Switch };
