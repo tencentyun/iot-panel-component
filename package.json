@@ -1,11 +1,10 @@
 {
   "name": "qcloud-iot-panel-component",
-  "version": "0.0.40",
+  "version": "1.0.0-beta",
   "description": "腾讯连连开发面板组件",
   "main": "lib/index.js",
   "browser": "h5/index.js",
   "typings": "lib/index.d.ts",
-  "module": "es/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "npx dumi dev",
@@ -14,7 +13,7 @@
     "dev": "concurrently \"npm run dev:comp \" \"npm run dev:tsc \"",
     "dev:comp": "rollup -c --watch",
     "dev:tsc": "tsc -p tsconfig.json --emitDeclarationOnly -d --outDir lib/ --skipLibCheck --watch",
-    "build": "rm -rf ./lib ./es && cross-env NODE_ENV=production rollup -c && npm run build:tsc",
+    "build": "rm -rf ./lib ./h5 ./taro && cross-env NODE_ENV=production rollup -c && npm run build:tsc",
     "build:tsc": "tsc -p tsconfig.json --emitDeclarationOnly --skipLibCheck -d --outDir lib/"
   },
   "keywords": [
@@ -46,8 +45,8 @@
     "@typescript-eslint/parser": "^4.31.1",
     "concurrently": "^6.2.1",
     "cross-env": "^7.0.3",
-    "dumi": "^1.1.28",
-    "dumi-theme-mobile": "^1.1.11",
+    "dumi": "^1.1.36",
+    "dumi-theme-mobile": "^1.1.15",
     "esbuild": "^0.12.28",
     "esbuild-plugin-alias-path": "^0.2.3",
     "eslint-plugin-react": "^7.25.1",

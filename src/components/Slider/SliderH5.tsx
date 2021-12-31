@@ -290,5 +290,5 @@ SliderH5.defaultProps = {
   value: 0,
 };
 
-export default SliderH5;
+export { SliderH5 as Slider };
 

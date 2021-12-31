@@ -1,1 +1,1 @@
-export const Slider = process.env.TARO_ENV === 'weapp' ? require('./SliderTaro') : require('./SliderH5');
+export const { Slider } = process.env.TARO_ENV === 'weapp' ? require('./SliderTaro') : require('./SliderH5');

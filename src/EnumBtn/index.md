@@ -3,12 +3,8 @@
 ### Demo
 
 ```jsx
-/**
- * background: '6697f6'
- */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { EnumBtn, BoolWidget } from 'qcloud-iot-panel-component';
-
 export default () => {
   const [enumVal, setEnumVal] = useState(0);
   const [title, setTitle] = useState('');

@@ -26,7 +26,7 @@ const basePlugins = [
   esbuild({
     include: /\.[jt]sx?$/,
     target: 'es2015',
-    minify: false,
+    minify: isProd,
     jsx: 'transform',
     jsxFactory: 'React.createElement',
     jsxFragment: 'React.Fragment',
