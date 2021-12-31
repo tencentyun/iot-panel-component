@@ -17,7 +17,7 @@ const inputList = [
 ];
 
 const isProd = process.env.NODE_ENV === 'production';
-const external = ['react', 'weui', 'classnames', 'lodash.chunk', 'react-dom', 'is-url'];
+const external = ['react', 'weui', 'classnames', 'lodash.chunk', 'react-dom', 'is-url', '@tarojs/components', 'omit.js'];
 
 const basePlugins = [
   multiInput(),
