@@ -26,9 +26,7 @@ export function EnumPopup<T>({
   className,
   onChange = noop,
   onClose = noop,
-  disabled = false,
-  style,
-  className,
+  disabled = false
 }: EnumPopupProps<T>) {
   const {
     name,
