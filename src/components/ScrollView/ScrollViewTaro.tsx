@@ -1,1 +1,1 @@
-export { ScrollView as default } from '@tarojs/components';
+export { ScrollView } from '@tarojs/components';

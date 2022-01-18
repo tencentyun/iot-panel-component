@@ -49,7 +49,6 @@ function HoverableRaw<P extends keyof JSX.IntrinsicElements = 'span'>(
     parent || 'div',
     {
       ref,
-      hoverClass,
       className: classNames(className, {
         [hoverClass]: !disabled && hover,
       }),

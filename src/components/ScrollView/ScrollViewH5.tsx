@@ -229,7 +229,7 @@ class ScrollViewH5 extends React.Component<ScrollViewProps> {
           this.container = container;
         }}
         {
-          ...omit(this.props, ['className', 'scrollTop', 'scrollLeft'])
+          ...omit(this.props, ['className', 'scrollTop', 'scrollLeft', 'scrollX', 'scrollY'])
         }
         className={cls}
         onScroll={_onScroll}
@@ -245,4 +245,4 @@ class ScrollViewH5 extends React.Component<ScrollViewProps> {
   }
 }
 
-export default ScrollViewH5;
+export { ScrollViewH5 as ScrollView };
