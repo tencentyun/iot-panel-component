@@ -6,3 +6,4 @@ export * from './Icon';
 export * from './Modal';
 export * from './Card';
 export * from './Hoverable';
+export * from './Tips';
