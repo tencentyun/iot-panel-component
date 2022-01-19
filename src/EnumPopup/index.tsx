@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { EnumBtnProps } from '../EnumBtn';
 import { noop } from '../utils';
@@ -34,6 +34,10 @@ export function EnumPopup<T>({
 
   const [localValue, setLocalValue] = useState(value);
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
 
   return <>
     <Card
