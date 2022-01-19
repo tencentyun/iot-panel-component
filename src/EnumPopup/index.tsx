@@ -5,6 +5,7 @@ import { noop } from '../utils';
 import { ScrollView, Card, Hoverable, Modal } from '../components';
 import { TemplatePropertyConfig } from '../interface';
 import './index.less';
+import { PopupContainer } from '../utils/renderPortal';
 
 export interface EnumPopupProps<T> extends EnumBtnProps<T> {
   onClose?: () => void;
@@ -12,7 +13,7 @@ export interface EnumPopupProps<T> extends EnumBtnProps<T> {
   /**
    * @description 挂载弹窗内容的节点，仅支持 web 端
    */
-  popupContainer?: Element;
+  popupContainer?: PopupContainer;
 }
 
 export function EnumPopup<T>({

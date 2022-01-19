@@ -1,12 +1,14 @@
 /* eslint-disable react/display-name */
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { noop } from '../../utils';
 import { Hoverable } from '../Hoverable';
-import { ConfirmBtnGroup, ConfirmBtnGroupProps } from "../Btn";
+import { ConfirmBtnGroup, ConfirmBtnGroupProps } from '../Btn';
 import './Modal.less';
 import { StyledProps } from '../../interface';
+import { show } from './ModalShow';
+import { PopupContainer, renderPortal } from '../../utils/renderPortal';
+
 export interface ModalProps extends StyledProps {
   visible: boolean;
   title?: string | React.ReactNode;
@@ -19,7 +21,8 @@ export interface ModalProps extends StyledProps {
   /**
    * @description 组件挂载节点，仅支持 web 端
    */
-  popupContainer?: Element;
+  popupContainer?: PopupContainer;
+  onUnmount?: () => any;
 }
 
 export function Modal({
@@ -34,14 +37,11 @@ export function Modal({
   style,
   showBackBtn = false,
   popupContainer,
+  onUnmount,
 }: ModalProps) {
-  const renderWithPortal = (reactNode) => {
-    return HTMLElement && (popupContainer instanceof HTMLElement)
-      ? ReactDOM.createPortal(reactNode, popupContainer)
-      : reactNode;
-  };
+  useEffect(() => () => typeof onUnmount === 'function' && onUnmount(), []);
 
-  return renderWithPortal((
+  return renderPortal((
     <div
       className={classNames(
         'modal-container',
@@ -84,7 +84,7 @@ export function Modal({
         {children}
       </div>
     </div>
-  ));
+  ), popupContainer);
 }
 
 Modal.Body = ({ children }) => (
@@ -219,3 +219,5 @@ Modal.Message = ({ message }) => (
     {message}
   </div>
 );
+
+Modal.show = show;
