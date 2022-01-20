@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import './index.less';
-import { Icon, Switch } from '../components';
+import { Card, Switch } from '../components';
 import { noop } from '../utils';
 import { StyledProps } from '../interface';
 
@@ -14,13 +14,13 @@ interface BoolWidgetProps extends StyledProps {
    * @default 'normal'
    * @description 控制组件的长度
    */
-  size?: 'small' | 'normal',
+  // size?: 'small' | 'normal',
   value: boolean;
-  title?: string;
+  title?: string | JSX.Element;
   /**
    * @description 副标题
    */
-  description?: string,
+  description?: string | JSX.Element;
 
   /**
    * @description icon使用ionicons 4.x, 所有的icon名称在 https://github.com/tencentyun/iot-panel-component/blob/master/src/components/IonIcon/IonIcon.less
@@ -35,7 +35,7 @@ export function BoolWidget({
   title,
   description = '',
   value,
-  size = 'normal',
+  // size,
   icon,
   onChange = noop,
   disabled = false,
@@ -43,27 +43,21 @@ export function BoolWidget({
   style
 }: BoolWidgetProps) {
   return (
-    <div
-      className={classNames('iotp-bool-widget', className, { small: size === 'small' })}
+    <Card
+      className={classNames('iotp-bool-widget', className)}
       style={style}
-    >
-      <div className="iotp-bool-widget-hd">
-        {size === 'normal' && <Icon icon={icon}/>}
-        <div className="content">
-          <div>{title}</div>
-          {description && (
-            <div className="iotp-bool-widget-desc">
-              {description}
-            </div>
-          )}
-        </div>
-      </div>
-      <Switch
-        color={switchColor}
-        onChange={(e) => onChange(e.detail.value)}
-        checked={Boolean(value)}
-        disabled={disabled}
-      />
-    </div>
+      icon={icon}
+      title={title}
+      subtitle={description}
+      desc={(
+        <Switch
+          color={switchColor}
+          onChange={(e) => onChange(e.detail.value)}
+          checked={Boolean(value)}
+          disabled={disabled}
+        />
+      )}
+      disabled={disabled}
+    />
   );
 }

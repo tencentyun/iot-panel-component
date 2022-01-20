@@ -66,10 +66,9 @@ export function EnumPopup<T>({
               {enumList.map((item) => (
                 <Hoverable
                   key={item.text}
-                  className={classNames('checkbox-item need-hover', {
+                  className={classNames('checkbox-item', {
                     actived: item.value === localValue,
                   })}
-                  hoverClass='hover'
                   onClick={() => setLocalValue(item.value)}
                 >
                   <div className="checkbox-container">
