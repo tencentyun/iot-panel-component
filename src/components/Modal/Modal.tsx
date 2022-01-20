@@ -69,8 +69,7 @@ export function Modal({
           <div className='modal-header'>
             {showBackBtn && (
               <Hoverable
-                className='back-btn need-hover'
-                hoverClass='hover'
+                className='back-btn'
                 onClick={onClose}
               >
                 <img

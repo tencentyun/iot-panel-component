@@ -70,16 +70,9 @@ export function Btn({
         }
       )}
       style={style}
-      hoverClass={disabled ? 'none' : hoverClass}
-      onClick={(e: React.MouseEvent<HTMLElement>) => {
-        if (disabled) {
-          return;
-        }
-
-        if (typeof onClick === 'function') {
-          onClick(e);
-        }
-      }}
+      hoverClass={hoverClass}
+      onClick={onClick}
+      disabled={disabled}
     >
       {renderContent()}
     </Hoverable>

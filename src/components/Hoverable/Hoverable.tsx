@@ -1,7 +1,9 @@
 import React, { forwardRef, useState, Ref, useEffect } from 'react';
 import classNames from 'classnames';
 import { StyledProps } from '../../interface';
-import { noop } from '../../utils';
+import './Hoverable.less';
+import { callAll } from '../../utils/callAll';
+
 export interface HoverableProps<P extends keyof JSX.IntrinsicElements>
   extends StyledProps {
 
@@ -18,25 +20,26 @@ export interface HoverableProps<P extends keyof JSX.IntrinsicElements>
   hoverClass?: string;
 }
 
-export type HoverablePropsType<
-  P extends keyof JSX.IntrinsicElements
-> = JSX.IntrinsicElements[P] & HoverableProps<P>;
+export type HoverablePropsType<P extends keyof JSX.IntrinsicElements> = JSX.IntrinsicElements[P] & HoverableProps<P>;
 
 const isTaro = process.env.TARO_ENV === 'weapp';
 
-function HoverableRaw<P extends keyof JSX.IntrinsicElements = 'span'>(
-  props: HoverablePropsType<P>,
-  ref: Ref<JSX.IntrinsicElements[P]>
-) {
-  const {
-    parent,
+export const Hoverable = forwardRef(function Hoverable<P extends keyof JSX.IntrinsicElements = 'div'>(
+  {
+    parent = 'div' as P,
     children,
     className,
     disabled,
     hoverClass = 'hover',
+    // 避免传进来的onTouchStart等被覆盖
+    onTouchStart,
+    onTouchMove,
+    onTouchEnd,
+    onClick,
     ...htmlProps
-  } = props;
-
+  }: HoverablePropsType<P>,
+  ref: Ref<JSX.IntrinsicElements[P]>
+) {
   const [hover, setHover] = useState(false);
 
   useEffect(() => {
@@ -45,20 +48,35 @@ function HoverableRaw<P extends keyof JSX.IntrinsicElements = 'span'>(
     }
   }, [disabled]);
 
-  return React.createElement(
-    parent || 'div',
-    {
-      ref,
-      className: classNames(className, {
-        [hoverClass]: !disabled && hover,
-      }),
-      onTouchStart: isTaro ? noop : () => !disabled && setHover(true),
-      onTouchMove: isTaro ? noop : () => !disabled && setHover(false),
-      onTouchEnd: isTaro ? noop : () => !disabled && setHover(false),
-      ...htmlProps,
+  const genTouchHandler = enable => () => {
+    if (!isTaro && !disabled) {
+      setHover(enable);
+    }
+  };
+
+  const props: any = {
+    ref,
+    className: classNames('iotp-hovable', className, {
+      [hoverClass]: !disabled && hover,
+    }),
+    onTouchStart: callAll(genTouchHandler(true), onTouchStart as any),
+    onTouchMove: callAll(genTouchHandler(false), onTouchMove as any),
+    onTouchEnd: callAll(genTouchHandler(false), onTouchEnd as any),
+    onClick: (e) => {
+      if (!disabled && typeof onClick === 'function') {
+        onClick(e);
+      }
     },
+    ...htmlProps,
+  };
+
+  if (isTaro) {
+    props.hoverClass = hoverClass;
+  }
+
+  return React.createElement(
+    parent,
+    props,
     children
   );
-}
-
-export const Hoverable = forwardRef(HoverableRaw);
+});
