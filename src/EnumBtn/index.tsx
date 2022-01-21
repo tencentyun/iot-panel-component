@@ -1,11 +1,10 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import classNames from 'classnames';
-import { DefaultIcon } from '../components/DefaultIcon';
-import thunk from 'lodash.chunk';
 import { noop } from '../utils';
 import { Icon } from '../components/Icon';
 import { StyledProps } from '../interface';
 import './index.less';
+import { IconBtn } from '../components/IconBtn';
 
 export interface EnumItem<T> {
   value: T;
@@ -29,6 +28,7 @@ export interface EnumBtnProps<T> extends StyledProps {
   icon?: string;
   onChange?: (value: T) => void;
   disabled?: boolean;
+  itemPerRow?: number;
 }
 
 export function EnumBtn<T>({
@@ -40,13 +40,8 @@ export function EnumBtn<T>({
   disabled,
   style,
   className,
+  itemPerRow = 4,
 }: EnumBtnProps<T>) {
-  const chunkOpts = useMemo(() => {
-    const firstLine = enumList.length % 4;
-    const rest = thunk(enumList.slice(firstLine), 4);
-    return [enumList.slice(0, firstLine), ...rest];
-  }, [enumList]);
-
   return (
     <div className={classNames('iotp-enum-btn', className)} style={style}>
       {title && (
@@ -55,32 +50,29 @@ export function EnumBtn<T>({
           <span>{title}</span>
         </div>
       )}
-      <div className="iotp-enum-btn-group">
-        {
-          chunkOpts.map((row: EnumItem<T>[], index) => <div className="enum-row" key={index}>
-            {row.map(({ value: itemValue, text, icon }) => (
-              <div
-                className={classNames('enum-item', { actived: value === itemValue })}
-                onClick={() => {
-                  if (!disabled && itemValue !== value) {
-                    onChange(itemValue);
-                  }
-                }}
-                key={text}
-              >
-                <button className="enum-btn">
-                  {
-                    icon
-                      ? <Icon icon={icon} color={value === itemValue ? '#fff' : '#000'}/>
-                      : <DefaultIcon actived={value === itemValue}/>
-                  }
-                </button>
-                <span className="enum-title">{text}</span>
-              </div>
-            ))
-            }
-          </div>)
-        }
+      <div className="iotp-enum-btn-body">
+        {enumList.map(({ value: itemValue, text, icon }) => (
+          <IconBtn
+            className='iotp-enum-btn-item'
+            key={text}
+            actived={value === itemValue}
+            icon={icon}
+            btnText={text}
+            btnTextColor='#000'
+            iconColor='#000'
+            activedIconColor='#fff'
+            iconBgColor='#F2F2F2'
+            activedIconBgColor='#0066FF'
+            style={{
+              width: `${100 / itemPerRow}%`,
+            }}
+            onClick={() => {
+              if (!disabled && itemValue !== value) {
+                onChange(itemValue);
+              }
+            }}
+          />
+        ))}
       </div>
     </div>
   );

@@ -1,54 +1,26 @@
 @import '../_style/var.less';
 
-.iotp-enum-btn{
+.iotp-enum-btn {
   background: #ffffff;
   color: #000;
   padding: @widgetPadding;
   margin: @widgetMargin;
   border-radius: 15px;
-  &-title{
+
+  &-title {
     display: flex;
     font-size: 16px;
     margin-bottom: 20px;
-    >span{
+
+    > span {
       margin-left: 10px;
     }
   }
-  .iotp-enum-btn-group{
-    display: flex;
-    flex-direction: column;
-    .enum-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      text-align: center;
-      &:not(:first-child) {
-        margin-top: 10px;
-      }
-      .enum-item{
-        &.actived .enum-btn{
-          background: #0066FF;
-        }
-        span{
-          display: block;
-          text-align: center;
-          line-height: 2;
-        }
-      }
-      .enum-btn{
-        border: none;
-        width: 48px;
-        height: 48px;
-        background: #F2F2F2;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-      }
-    }
-    .enum-title{
-      font-size: 12px;
+
+  .iotp-enum-btn-body {
+    .iotp-enum-btn-item {
+      float: left;
+      margin-bottom: 30px;
     }
   }
 }

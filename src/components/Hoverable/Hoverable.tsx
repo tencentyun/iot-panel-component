@@ -56,7 +56,7 @@ export const Hoverable = forwardRef(function Hoverable<P extends keyof JSX.Intri
 
   const props: any = {
     ref,
-    className: classNames('iotp-hovable', className, {
+    className: classNames('iotp-hoverable', className, {
       [hoverClass]: !disabled && hover,
     }),
     onTouchStart: callAll(genTouchHandler(true), onTouchStart as any),

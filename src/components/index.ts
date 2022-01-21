@@ -7,3 +7,4 @@ export * from './Modal';
 export * from './Card';
 export * from './Hoverable';
 export * from './Tips';
+export * from './IconBtn';
