@@ -68,7 +68,6 @@ export const TipsMain = forwardRef<TipsHandler, TipsProps>(function Tips({
 
     if (nextVisible === false) {
       setTimeout(() => {
-        console.log('onClose trigger');
         onClose();
       }, 200);
     }

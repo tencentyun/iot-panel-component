@@ -2,11 +2,10 @@
 import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { noop } from '../../utils';
-import { Hoverable } from '../Hoverable';
 import { ConfirmBtnGroup, ConfirmBtnGroupProps } from '../Btn';
 import './Modal.less';
 import { StyledProps } from '../../interface';
-import { show } from './ModalShow';
+import { show, confirm, alert, showModal } from './ModalShow';
 import { PopupContainer, renderPortal } from '../../utils/renderPortal';
 
 export interface ModalProps extends StyledProps {
@@ -17,7 +16,6 @@ export interface ModalProps extends StyledProps {
   fixedBottom?: boolean;
   children?: React.ReactNode;
   containerClassName?: string;
-  showBackBtn?: boolean;
   /**
    * @description 组件挂载节点，仅支持 web 端
    */
@@ -35,7 +33,6 @@ export function Modal({
   className,
   containerClassName,
   style,
-  showBackBtn = false,
   popupContainer,
   onUnmount,
 }: ModalProps) {
@@ -67,16 +64,6 @@ export function Modal({
       >
         {title && (
           <div className='modal-header'>
-            {showBackBtn && (
-              <Hoverable
-                className='back-btn'
-                onClick={onClose}
-              >
-                <img
-                  className='back-btn-icon'
-                />
-              </Hoverable>
-            )}
             <div className='modal-title'>{title}</div>
           </div>
         )}
@@ -110,8 +97,6 @@ Modal.Footer = ({
 };
 
 export interface FooterConfirmBtnGroup extends ConfirmBtnGroupProps {
-  confirmColor?: string;
-  cancelColor?: string;
   isInFixedBottomModal?: boolean;
   noBorder?: boolean;
   btnSize?: number;
@@ -125,18 +110,18 @@ Modal.FooterConfirmBtnGroup = ({
   onCancel,
   onConfirm,
   confirmText,
-  confirmColor = '#0066ff',
-  confirmBtnType,
+  confirmColor,
+  confirmBtnType = 'primary',
   confirmBtnDisabled,
   cancelText,
   cancelBtnDisabled,
-  cancelColor = '#6c7078',
-  cancelBtnType,
+  cancelColor,
+  cancelBtnType = 'cancel',
   isInFixedBottomModal,
   noBorder,
-  btnSize = 32,
+  // 移除btnSize，因为h5无法用rpx单位，可能会导致两端表现不一致，这里固定样式即可
+  // btnSize = 32,
 }: FooterConfirmBtnGroup) => {
-
   const renderContent = () => {
     if (isInFixedBottomModal) {
       return (
@@ -145,9 +130,11 @@ Modal.FooterConfirmBtnGroup = ({
             onCancel,
             onConfirm,
             confirmText,
+            confirmColor,
             confirmBtnType,
             confirmBtnDisabled,
             cancelText,
+            cancelColor,
             cancelBtnType,
             cancelBtnDisabled,
           }}
@@ -159,11 +146,11 @@ Modal.FooterConfirmBtnGroup = ({
       <div className='footer-confirm-btn-group'>
         {!!cancelText && (
           <Modal.FooterBtn
+            className={classNames(`btn-type-${cancelBtnType}`)}
             noBorder={noBorder}
             onClick={onCancel}
             style={{
               color: cancelColor,
-              fontSize: `${btnSize}rpx`
             }}
           >
             {cancelText}
@@ -171,11 +158,11 @@ Modal.FooterConfirmBtnGroup = ({
         )}
         {!!confirmText && (
           <Modal.FooterBtn
+            className={classNames(`btn-type-${confirmBtnType}`)}
             noBorder={noBorder}
             onClick={onConfirm}
             style={{
               color: confirmColor,
-              fontSize: `${btnSize}rpx`
             }}
           >
             {confirmText}
@@ -220,3 +207,6 @@ Modal.Message = ({ message }) => (
 );
 
 Modal.show = show;
+Modal.showModal = showModal;
+Modal.confirm = confirm;
+Modal.alert = alert;

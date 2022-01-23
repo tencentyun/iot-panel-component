@@ -56,10 +56,13 @@ export function BtnGroup({
 export interface ConfirmBtnGroupProps extends StyledProps {
   onCancel?: any;
   onConfirm?: any;
+  btnSize?: string | number;
   confirmText?: string | React.ReactNode;
+  confirmColor?: string;
   confirmBtnType?: BtnOptions['type'];
   confirmBtnDisabled?: boolean;
   cancelText?: string | React.ReactNode;
+  cancelColor?: string;
   cancelBtnType?: BtnOptions['type'];
   cancelBtnDisabled?: boolean;
 }

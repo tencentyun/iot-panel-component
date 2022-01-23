@@ -57,7 +57,6 @@ export function EnumPopup<T>({
         fixedBottom={true}
         onClose={() => setVisible(false)}
         title={name}
-        showBackBtn={false}
         popupContainer={popupContainer}
       >
         <Modal.Body>

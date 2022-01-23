@@ -236,9 +236,7 @@ class ScrollViewH5 extends React.Component<ScrollViewProps> {
         onTouchMove={
           _onTouchMove
         }
-        onLoad={e => {
-          console.log('onload', e);
-        }}>
+      >
         {this.props.children}
       </div>
     );
