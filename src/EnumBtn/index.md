@@ -30,6 +30,14 @@ export default () => {
         enumList={enumList}
         onChange={(v) => {console.log(v); setEnumVal(v)} }
       />
+      <EnumBtn
+        title={title}
+        icon={'create'}
+        value={enumVal}
+        enumList={enumList}
+        itemPerRow={3}
+        onChange={(v) => {console.log(v); setEnumVal(v)} }
+      />
     </div>
   )
 }
