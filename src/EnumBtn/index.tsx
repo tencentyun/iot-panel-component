@@ -28,6 +28,9 @@ export interface EnumBtnProps<T> extends StyledProps {
   icon?: string;
   onChange?: (value: T) => void;
   disabled?: boolean;
+  /**
+   * @description 每行放置几项，最大为4
+   */
   itemPerRow?: number;
 }
 
@@ -42,6 +45,11 @@ export function EnumBtn<T>({
   className,
   itemPerRow = 4,
 }: EnumBtnProps<T>) {
+
+  const isInLastRow = (index) => {
+    return index / itemPerRow >= Math.ceil(enumList.length / itemPerRow) - 1;
+  };
+
   return (
     <div className={classNames('iotp-enum-btn', className)} style={style}>
       {title && (
@@ -51,7 +59,7 @@ export function EnumBtn<T>({
         </div>
       )}
       <div className="iotp-enum-btn-body">
-        {enumList.map(({ value: itemValue, text, icon }) => (
+        {enumList.map(({ value: itemValue, text, icon }, index) => (
           <IconBtn
             className='iotp-enum-btn-item'
             key={text}
@@ -65,6 +73,7 @@ export function EnumBtn<T>({
             activedIconBgColor='#0066FF'
             style={{
               width: `${100 / itemPerRow}%`,
+              marginBottom: isInLastRow(index) ? 0 : '30px'
             }}
             onClick={() => {
               if (!disabled && itemValue !== value) {
