@@ -9,10 +9,22 @@ import { show, confirm, alert, showModal } from './ModalShow';
 import { PopupContainer, renderPortal } from '../../utils/renderPortal';
 
 export interface ModalProps extends StyledProps {
+  /**
+   * @description 弹窗是否显示
+   */
   visible: boolean;
+  /**
+   * @description 弹窗的标题
+   */
   title?: string | React.ReactNode;
+  /**
+   * @description 触发关闭操作时的回调函数
+   */
   onClose?: () => any;
   maskClosable?: boolean;
+  /**
+   * @description 弹窗展示时是否吸底
+   */
   fixedBottom?: boolean;
   children?: React.ReactNode;
   containerClassName?: string;

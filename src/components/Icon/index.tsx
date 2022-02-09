@@ -11,6 +11,9 @@ export type IconType = 'ionicon' | 'tea' | 'raw';
 
 export interface IconProps extends StyledProps {
   type?: IconType;
+  /**
+   * @description icon名称
+   */
   icon?: string;
   color?: string;
   size?: number;

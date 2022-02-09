@@ -14,6 +14,7 @@ function parseType(type) {
 
 interface SwitchProps {
   checked: boolean
+  disabled?: boolean
   onChange: (e: any) => void
   className?: string
   color?: string
