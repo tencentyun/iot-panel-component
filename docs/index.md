@@ -22,7 +22,7 @@ import { BoolWidget } from 'qcloud-iot-panel-component';
 
 使用Taro的[HTML编译功能](https://taro-docs.jd.com/taro/docs/use-h5)，我们可以将包使用在小程序中，由于这个功能Taro 3.3.3之后才支持，在这之前需要先将Taro版本升级到`3.3.3`以上。
 
-1. 在config中配置如下：
+1. 在 `config/index.js` 中配置如下：
 
 ```js
   plugins: [
@@ -31,13 +31,16 @@ import { BoolWidget } from 'qcloud-iot-panel-component';
       pxtransformBlackList: [/iotp-/]
     }]
   ],
+  alias: {
+    'qcloud-iot-panel-component': path.resolve(__dirname, '../node_modules/qcloud-iot-panel-component/taro'), // 使用组件库的小程序版本
+  }
 ```
 
 使用方法上， 除上述配置外，其他使用方法与h5相同:
 
 ```ts
 // 引入组件库的css
-import 'qcloud-iot-panel-component/lib/index.css';
+import 'qcloud-iot-panel-component/index.css';
 
 import { BoolWidget } from 'qcloud-iot-panel-component';
 

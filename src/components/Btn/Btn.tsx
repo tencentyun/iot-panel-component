@@ -80,7 +80,7 @@ export function Btn({
 }
 
 export interface RawBtnProps extends StyledProps {
-  onClick?: any;
+  onClick?: (event) => void;
   children?: string | React.ReactNode;
   hoverClass?: string;
   //hoverStopPropagation?: boolean;
