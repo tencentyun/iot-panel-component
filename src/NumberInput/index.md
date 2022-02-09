@@ -1,5 +1,7 @@
 ## NumberInput
 
+NumberInput 可以用来操作物模型中的number(int, float)类型的值
+
 ### Demo
 
 ```tsx

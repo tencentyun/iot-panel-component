@@ -1,4 +1,4 @@
-# 腾讯连连标准组件库
+# Get Started
 ## H5 使用
 
 ```bash

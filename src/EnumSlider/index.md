@@ -1,6 +1,6 @@
 ## EnumSlider
 
-用于操作枚举型数据，但是是一个slider形式
+用于操作物模型中的枚举型数据，但是是一个slider形式
 
 ### demo
 

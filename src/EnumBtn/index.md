@@ -1,5 +1,7 @@
 ## EnumBtn
 
+EnumBtn 可以用来操作物模型中的枚举类型的值
+
 ### Demo
 
 ```jsx

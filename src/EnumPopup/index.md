@@ -1,5 +1,7 @@
 ## EnumPopup
 
+EnumPopup 可以用来操作物模型中的枚举类型的值，以弹窗的形式展示选项
+
 ### Demo
 
 ```jsx
