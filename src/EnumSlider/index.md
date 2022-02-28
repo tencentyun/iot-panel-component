@@ -18,11 +18,19 @@ const enumList = [
 ];
 
 export default () => (
-  <EnumSlider
-    value={enumVal}
-    enumList={enumList}
-    onChange={(v) => {console.log(v); setEnumVal(v)} }
-  />
+  <div>
+    <EnumSlider
+      value={enumVal}
+      enumList={enumList}
+      onChange={(v) => {console.log(v); setEnumVal(v)} }
+    />
+    <EnumSlider
+      disabled
+      value={enumVal}
+      enumList={enumList}
+      onChange={(v) => {console.log(v); setEnumVal(v)} }
+    />
+  </div>
 )
 ```
 

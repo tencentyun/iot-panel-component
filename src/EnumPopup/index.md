@@ -21,6 +21,7 @@ export default () => {
   ];
 
   return (
+    <div>
     <EnumPopup
       value={enumVal}
       icon="create"
@@ -28,6 +29,15 @@ export default () => {
       enumList={enumList}
       onChange={(v) => {console.log(v); setEnumVal(v)} }
     />
+    <EnumPopup
+      value={enumVal}
+      icon="create"
+      disabled
+      templateConfig={{name: 'enumPopup 禁用态'}}
+      enumList={enumList}
+      onChange={(v) => {console.log(v); setEnumVal(v)} }
+    />
+    </div>
   )
 }
 ```

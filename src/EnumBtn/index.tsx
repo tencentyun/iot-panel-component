@@ -51,7 +51,10 @@ export function EnumBtn<T>({
   };
 
   return (
-    <div className={classNames('iotp-enum-btn', className)} style={style}>
+    <div
+      className={classNames('iotp-enum-btn', className, { disabled })}
+      style={style}
+    >
       {title && (
         <div className="iotp-enum-btn-title">
           <Icon icon={icon}/>
@@ -66,11 +69,12 @@ export function EnumBtn<T>({
             actived={value === itemValue}
             icon={icon}
             btnText={text}
-            btnTextColor='#000'
+            disabled={disabled}
+            btnTextColor={disabled ? 'rgba(0,0,0,0.6)' : '#000'}
             iconColor='#000'
             activedIconColor='#fff'
             iconBgColor='#F2F2F2'
-            activedIconBgColor='#0066FF'
+            activedIconBgColor={ disabled ? '#AACFFF' : '#0066FF'}
             style={{
               width: `${100 / itemPerRow}%`,
               marginBottom: isInLastRow(index) ? 0 : '30px'

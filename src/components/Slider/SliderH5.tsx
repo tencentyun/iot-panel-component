@@ -228,10 +228,11 @@ class SliderH5 extends React.Component<SliderProps, SliderState> {
       activeColor,
       blockColor,
       blockSize = 0,
+      disabled,
       ...restProps
     } = this.props;
     let _blockSize = blockSize;
-    const cls = classNames('weui-slider-box', className);
+    const cls = classNames('weui-slider-box', className, { disabled: disabled });
 
     const innerStyles = {
       backgroundColor,
@@ -241,6 +242,7 @@ class SliderH5 extends React.Component<SliderProps, SliderState> {
     const trackStyles = {
       width: `${percent}%`,
       backgroundColor: activeColor,
+      opacity: disabled ? 0.6 : 1,
     };
 
     if (_blockSize < 12) {

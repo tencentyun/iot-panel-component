@@ -48,9 +48,11 @@ export function NumberInput({
 
   return (
     <div
-      className={classNames('iotp-number-input', className, {
-        disabled: outerDisabled, // 产品希望只读状态下也是有颜色的，适合特定情景下效果呈现
-      })}
+      className={classNames(
+        'iotp-number-input',
+        className,
+        { disabled: outerDisabled }, // 产品希望只读状态下也是有颜色的，适合特定情景下效果呈现
+      )}
       style={style}
     >
       <div className="panel-inner">

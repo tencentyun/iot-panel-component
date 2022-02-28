@@ -20,6 +20,15 @@ export default () => {
         templateInfo={{name: '温度', define: {unit: '度'}}}
       />
       <NumberSlider
+        disabled
+        step={2}
+        value={100}
+        min={0}
+        onChange={(...args) => console.log(...args)}
+        max={200}
+        templateInfo={{name: '温度', define: {unit: '度'}}}
+      />
+      <NumberSlider
         value={50}
         step={0.33}
         min={30}

@@ -44,7 +44,7 @@ export function BoolWidget({
 }: BoolWidgetProps) {
   return (
     <Card
-      className={classNames('iotp-bool-widget', className)}
+      className={classNames('iotp-bool-widget', className, { disabled: disabled })}
       style={style}
       icon={icon}
       title={title}

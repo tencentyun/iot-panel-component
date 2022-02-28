@@ -31,6 +31,7 @@ export default () => {
         value={enumVal}
         enumList={enumList}
         onChange={(v) => {console.log(v); setEnumVal(v)} }
+        disabled
       />
       <EnumBtn
         title={title}

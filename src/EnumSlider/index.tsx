@@ -102,7 +102,7 @@ export function EnumSlider<T>({
 
   const handleTouchStart = (e) => {
     e.preventDefault();
-    if (outerValue !== value) {
+    if (disabled || outerValue !== value) {
       return;
     }
     stateRef.current.dragging = true;
@@ -138,7 +138,7 @@ export function EnumSlider<T>({
 
   return (
     <div
-      className={classNames('scene-slider', 'iotp-enum-slider', className)}
+      className={classNames('scene-slider', 'iotp-enum-slider', className, { disabled })}
       style={style}
     >
       <div

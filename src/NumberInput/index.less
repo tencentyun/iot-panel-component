@@ -21,7 +21,7 @@
     color: #000;
     min-width: 80px;
     text-align: center;
-    font-weight: 500;
+    font-weight: 400;
     margin: 0 24px;
   }
 
@@ -36,13 +36,15 @@
     border-radius: 50px;
   }
 
-  .disabled {
+  &.disabled {
+    background-color: rgba(255,255,255,0.6);
     .panel-inner {
       .panel-body {
         .panel-text {
-          color: #c2c5cc;
+          color: rgba(0,0,0,0.6);
         }
         button {
+          cursor: not-allowed;
           color: #a1a7b2;
         }
       }
