@@ -12,6 +12,7 @@
     "declaration": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "esModuleInterop": true,
     "strictNullChecks": true,
     "sourceMap": true,
     "rootDir": "./src",
