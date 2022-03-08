@@ -9,9 +9,7 @@ import { FooterConfirmBtnGroup, Modal, ModalProps } from './Modal';
 import { getOverlayRoot } from '../../utils/getOverlayRoot';
 import { noop } from '../../utils';
 
-export interface ModalShowOptions
-  extends Omit<ModalProps, 'visible' | 'onUnmount'> {
-}
+export type ModalShowOptions = Omit<ModalProps, 'visible' | 'onUnmount'>
 
 export interface ModalShowHandle {
   /**
@@ -177,8 +175,7 @@ export function alert(content: ShowModalApiOptions['content'], {
   });
 }
 
-export interface ModalShowProps extends Omit<ModalProps, 'visible'> {
-}
+export type ModalShowProps = Omit<ModalProps, 'visible'>
 
 export interface ModalShowInstance {
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;

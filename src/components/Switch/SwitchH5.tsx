@@ -42,7 +42,7 @@ class SwitchH5 extends React.Component<SwitchProps, {checked: boolean}> {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.hasOwnProperty('checked')) {
+    if (Object.prototype.hasOwnProperty.call(nextProps, 'checked')) {
       this.setState({
         checked: nextProps.checked,
       });

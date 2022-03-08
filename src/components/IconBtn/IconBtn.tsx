@@ -72,5 +72,5 @@ export function IconBtn({
         <span className="btn-text" style={{ color: btnTextColor }}>{btnText}</span>
       )}
     </div>
-  )
+  );
 }

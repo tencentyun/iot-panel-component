@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "npx dumi dev",
     "docs:build": "npx dumi build",
-    "lint": "eslint src",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "cleanup": "rm -rf ./lib/** && rm -rf ./h5/** && rm -rf ./taro/**",
     "dev": "npm run cleanup && rollup -c --watch",
     "build": "npm run cleanup && cross-env NODE_ENV=production rollup -c"
@@ -48,6 +48,7 @@
     "dumi-theme-mobile": "^1.1.15",
     "esbuild": "^0.12.28",
     "esbuild-plugin-alias-path": "^0.2.3",
+    "eslint": "7.32.0",
     "eslint-plugin-react": "^7.25.1",
     "less": "^4.1.1",
     "postcss": "^8.3.6",
