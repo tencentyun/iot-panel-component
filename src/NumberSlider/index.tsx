@@ -69,7 +69,7 @@ export function NumberSlider({
     if (process.env.TARO_ENV === 'weapp') {
       // 解决获取clientRect可能为null的问题 https://github.com/NervJS/taro/issues/10242
       setTimeout(() => {
-        (nodeRef as any).getBoundingClientRect().then(res => {
+        nodeRef && nodeRef.getBoundingClientRect().then(res => {
           if (res !== null) {
             tagOffset.current = res.width / 2;
           }
