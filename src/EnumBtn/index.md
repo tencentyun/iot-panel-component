@@ -1,14 +1,12 @@
 ## EnumBtn
 
+EnumBtn 可以用来操作物模型中的枚举类型的值
+
 ### Demo
 
 ```jsx
-/**
- * background: '6697f6'
- */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { EnumBtn, BoolWidget } from 'qcloud-iot-panel-component';
-
 export default () => {
   const [enumVal, setEnumVal] = useState(0);
   const [title, setTitle] = useState('');
@@ -32,6 +30,15 @@ export default () => {
         icon={'create'}
         value={enumVal}
         enumList={enumList}
+        onChange={(v) => {console.log(v); setEnumVal(v)} }
+        disabled
+      />
+      <EnumBtn
+        title={title}
+        icon={'create'}
+        value={enumVal}
+        enumList={enumList}
+        itemPerRow={3}
         onChange={(v) => {console.log(v); setEnumVal(v)} }
       />
     </div>

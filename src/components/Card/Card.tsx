@@ -8,8 +8,9 @@ import { Hoverable } from '../Hoverable';
 export interface CardProps extends StyledProps {
   // 若传入子节点，则直接渲染子节点
   // 否则渲染 title、desc 和 icon
-  title?: string;
-  desc?: string;
+  title?: string | JSX.Element;
+  subtitle?: string | JSX.Element;
+  desc?: string | JSX.Element;
   icon?: string;
   direction?: 'row' | 'column';
   onClick?: () => void,
@@ -19,6 +20,7 @@ export interface CardProps extends StyledProps {
 
 export function Card({
   title,
+  subtitle,
   desc,
   icon,
   direction = 'row',
@@ -40,44 +42,48 @@ export function Card({
       break;
   }
 
-  const presetIcon = (
-    <Icon
-      size={24}
-      icon={icon}
-    />
-  );
+  const renderContent = () => {
+    if (Boolean(children)) return children;
 
-  if (!children) {
-    children = (
+    return (
       <>
-        { Boolean(icon) && <div className="iotp-card__icon">{presetIcon}</div> }
-        <div className="iotp-card__title">{title}</div>
+        {Boolean(icon) && (
+          <div className="iotp-card__icon">
+            <Icon
+              size={24}
+              icon={icon}
+            />
+          </div>
+        )}
+        <div className="iotp-card__title">
+          {title}
+          {Boolean(subtitle) && (
+            <div className="iotp-card__subtitle">{subtitle}</div>
+          )}
+        </div>
         <div className="iotp-card__desc">
           {desc}
-          <span className="iotp-card__ft"></span>
+          {clickable && <span className="iotp-card__ft"/>}
         </div>
       </>
     );
-  }
+  };
 
   return (
-    <div className={className}>
-      <Hoverable
-        className={classNames(
-          'iotp-card',
-          'need-hover',
-          directionClass,
-          {
-            'card_disabled': disabled,
-          }
-        )}
-        hoverClass="hover"
-        style={style}
-        onClick={disabled ? undefined : onClick}
-        disabled={disabled || !clickable}
-      >
-        {children}
-      </Hoverable>
-    </div>
+    <Hoverable
+      className={classNames(
+        className,
+        'iotp-card',
+        directionClass,
+        {
+          'card_disabled': disabled,
+        }
+      )}
+      style={style}
+      onClick={onClick}
+      disabled={disabled || !clickable}
+    >
+      {renderContent()}
+    </Hoverable>
   );
 }

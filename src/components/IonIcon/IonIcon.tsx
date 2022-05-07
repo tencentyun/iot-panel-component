@@ -1,34 +1,39 @@
 import React from 'react';
 import classNames from 'classnames';
-import { StyledProps } from '../../interface';
+import { StyledProps, ThemeColorMap, ThemeColorType } from '../../interface';
 import './IonIcon.less';
 
-export interface IonIconProps extends StyledProps {
+interface IconProps extends StyledProps {
   icon: string;
   color?: string;
   size?: number;
-  theme?: 'md' | 'ios' | 'logo';
+  theme?: 'ios' | 'logo' | 'md';
+  colorTheme?: ThemeColorType;
+  style?: React.CSSProperties
 }
 
 export function IonIcon({
   icon,
   color = '#000',
+  colorTheme,
   size = 24,
   theme = 'md',
-  style = {},
+  style,
   className,
-}: IonIconProps) {
+}: IconProps) {
+  if (!color && colorTheme && ThemeColorMap[colorTheme]) {
+    color = ThemeColorMap[colorTheme];
+  }
 
   const iconSize = `${size}px`;
-  const NONE_ICON = 'none';
 
   return (
-    <div
+    <i
       className={classNames('ion-icon', `ion-${theme}-${icon}`, className)}
       style={{
         color,
         fontSize: iconSize,
-        width: icon === NONE_ICON ? '0px' : iconSize,
+        width: iconSize,
         height: iconSize,
         lineHeight: iconSize,
         ...style,

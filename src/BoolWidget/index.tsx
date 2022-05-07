@@ -1,11 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
 import './index.less';
-import { Icon } from '../components/Icon';
+import { Card, Switch } from '../components';
 import { noop } from '../utils';
-const { Switch } = process.env.TARO_ENV === 'weapp' ? require('@tarojs/components') : require('../components/switch');
+import { StyledProps } from '../interface';
 
-interface BoolWidgetProps {
+interface BoolWidgetProps extends StyledProps {
   /**
    * @description 控制switch的颜色
    */
@@ -14,9 +14,14 @@ interface BoolWidgetProps {
    * @default 'normal'
    * @description 控制组件的长度
    */
-  size?: 'small' | 'normal',
+  // size?: 'small' | 'normal',
   value: boolean;
-  title?: string;
+  title?: string | JSX.Element;
+  /**
+   * @description 副标题
+   */
+  description?: string | JSX.Element;
+
   /**
    * @description icon使用ionicons 4.x, 所有的icon名称在 https://github.com/tencentyun/iot-panel-component/blob/master/src/components/IonIcon/IonIcon.less
    */
@@ -25,24 +30,34 @@ interface BoolWidgetProps {
   onChange?: (value: boolean) => void
 }
 
-export function BoolWidget(props: BoolWidgetProps) {
-  const {
-    switchColor = '#006EFF',
-    title,
-    value,
-    size = 'normal',
-    icon,
-    onChange = noop,
-    disabled = false,
-  } = props;
-
+export function BoolWidget({
+  switchColor = '#006EFF',
+  title,
+  description = '',
+  value,
+  // size,
+  icon,
+  onChange = noop,
+  disabled = false,
+  className,
+  style
+}: BoolWidgetProps) {
   return (
-    <div className={classNames('iotp-bool-widget', { small: size === 'small' })}>
-      <div className="iotp-bool-widget-title">
-        {size === 'normal' && <Icon icon={icon}/>}
-        <span>{title}</span>
-      </div>
-      <Switch color={switchColor} onChange={(e) => onChange(e.detail.value)} checked={Boolean(value)} disabled={disabled} />
-    </div>
+    <Card
+      className={classNames('iotp-bool-widget', className, { disabled: disabled })}
+      style={style}
+      icon={icon}
+      title={title}
+      subtitle={description}
+      desc={(
+        <Switch
+          color={switchColor}
+          onChange={(e) => onChange(e.detail.value)}
+          checked={Boolean(value)}
+          disabled={disabled}
+        />
+      )}
+      disabled={disabled}
+    />
   );
 }

@@ -4,6 +4,7 @@ import './index.less';
 import React from 'react';
 import omit from 'omit.js';
 import { isNumber, isBoolean, isString, isFunction } from '../../utils/parse-type';
+
 import classNames from 'classnames';
 
 /**
@@ -54,6 +55,9 @@ function parseType(props) {
 
 interface SliderProps {
   value: number
+  /**
+   * @description 上限
+   */
   max: number
   min: number
   step: number
@@ -79,9 +83,11 @@ interface SliderState {
   percent: number
   ogPercent: number
 }
-export class Slider extends React.Component<SliderProps, SliderState> {
+
+class SliderH5 extends React.Component<SliderProps, SliderState> {
   sliderInsRef: any
   static defaultProps: { max: number; min: number; step: number; showValue: boolean; disabled: boolean; value: number; };
+
   constructor(props: SliderProps) {
     super(props);
 
@@ -188,6 +194,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
       },
     );
   }
+
   handleTouchEnd(e) {
     if (!this.state.touching || this.props.disabled) {
       return;
@@ -221,10 +228,11 @@ export class Slider extends React.Component<SliderProps, SliderState> {
       activeColor,
       blockColor,
       blockSize = 0,
+      disabled,
       ...restProps
     } = this.props;
     let _blockSize = blockSize;
-    const cls = classNames('weui-slider-box', className);
+    const cls = classNames('weui-slider-box', className, { disabled: disabled });
 
     const innerStyles = {
       backgroundColor,
@@ -234,6 +242,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
     const trackStyles = {
       width: `${percent}%`,
       backgroundColor: activeColor,
+      opacity: disabled ? 0.6 : 1,
     };
 
     if (_blockSize < 12) {
@@ -255,7 +264,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
       <div className={cls} {...omit(restProps, ['onChanging'])} >
         <div className='weui-slider'>
           <div className='weui-slider__inner' style={innerStyles} ref={c => (this.sliderInsRef = c)}>
-            <div style={trackStyles} className='weui-slider__track' />
+            <div style={trackStyles} className='weui-slider__track'/>
             <div
               style={handlerStyles}
               onTouchStart={this.handleTouchStart}
@@ -263,7 +272,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
               onTouchEnd={this.handleTouchEnd}
               className='weui-slider__handler'
             />
-            <input type='hidden' name={name} value={this.state.value} />
+            <input type='hidden' name={name} value={this.state.value}/>
           </div>
         </div>
         {showValue ? (
@@ -276,7 +285,7 @@ export class Slider extends React.Component<SliderProps, SliderState> {
   }
 }
 
-Slider.defaultProps = {
+SliderH5.defaultProps = {
   max: 100,
   min: 0,
   step: 1,
@@ -284,3 +293,6 @@ Slider.defaultProps = {
   disabled: false,
   value: 0,
 };
+
+export { SliderH5 as Slider };
+

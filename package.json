@@ -1,18 +1,18 @@
 {
   "name": "qcloud-iot-panel-component",
-  "version": "0.0.39",
+  "version": "1.0.0",
   "description": "腾讯连连开发面板组件",
   "main": "lib/index.js",
+  "browser": "h5/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "npx dumi dev",
     "docs:build": "npx dumi build",
-    "lint": "eslint src",
-    "dev": "concurrently \"npm run dev:comp \" \"npm run dev:tsc \"",
-    "dev:comp": "rollup -c --watch",
-    "dev:tsc": "tsc -p tsconfig.json --emitDeclarationOnly -d --outDir lib/ --skipLibCheck --watch",
-    "build": "rm -rf ./lib && cross-env NODE_ENV=production rollup -c && npm run build:tsc",
-    "build:tsc": "tsc -p tsconfig.json --emitDeclarationOnly --skipLibCheck -d --outDir lib/"
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "cleanup": "rm -rf ./lib/** && rm -rf ./h5/** && rm -rf ./taro/**",
+    "dev": "npm run cleanup && rollup -c --watch",
+    "build": "npm run cleanup && cross-env NODE_ENV=production rollup -c"
   },
   "keywords": [
     "iot",
@@ -21,11 +21,16 @@
   "files": [
     "lib/**/*.js",
     "lib/**/*.css",
-    "lib/**/*.d.ts"
+    "lib/**/*.d.ts",
+    "h5/*",
+    "taro/*"
   ],
   "homepage": "https://github.com/tencentyun/iot-panel-component",
   "bugs": {
     "url": "https://github.com/tencentyun/iot-panel-component/issues"
+  },
+  "resolutions": {
+    "url-parse": "^1.5.8"
   },
   "author": "iot-frontend",
   "license": "MIT",
@@ -35,33 +40,40 @@
     "@babel/preset-react": "^7.14.5",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-image": "^2.1.1",
+    "@rollup/plugin-replace": "^2.2.0",
     "@types/node": "^16.9.1",
     "@types/react": "16.9.55",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
     "concurrently": "^6.2.1",
     "cross-env": "^7.0.3",
-    "dumi": "^1.1.28",
-    "dumi-theme-mobile": "^1.1.11",
+    "dumi": "^1.1.36",
+    "dumi-theme-mobile": "^1.1.15",
     "esbuild": "^0.12.28",
     "esbuild-plugin-alias-path": "^0.2.3",
+    "eslint": "7.32.0",
     "eslint-plugin-react": "^7.25.1",
     "less": "^4.1.1",
     "postcss": "^8.3.6",
     "rollup": "^2.56.3",
+    "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-esbuild": "^4.5.0",
     "rollup-plugin-import-css": "^3.0.0",
     "rollup-plugin-multi-input": "^1.3.1",
     "rollup-plugin-postcss": "^4.0.1",
     "rollup-plugin-static-import": "^0.1.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.31.1",
     "typescript": "^4.4.3"
   },
   "dependencies": {
-    "@tarojs/components": "^3.3.7",
+    "@tarojs/components": "^3.3.20",
     "classnames": "^2.3.1",
-    "lodash.chunk": "^4.2.0",
-    "omit.js": "^2.0.2"
+    "hoist-non-react-statics": "^3.3.2",
+    "is-url": "^1.2.4",
+    "omit.js": "^2.0.2",
+    "tslib": "^2.3.1"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

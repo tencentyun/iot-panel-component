@@ -8,7 +8,10 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-
+  &.disabled{
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
   .scene-slider-container {
     position: relative;
     width: 338px;
@@ -33,8 +36,9 @@
         transition: all 0.2s;
         text-align: center;
         position: relative;
+        user-select: none;
         &.actived {
-          font-weight: 600;
+          font-weight: 500;
           font-size: 26px;
           opacity: 1;
           color: #000;

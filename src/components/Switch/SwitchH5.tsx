@@ -14,13 +14,14 @@ function parseType(type) {
 
 interface SwitchProps {
   checked: boolean
+  disabled?: boolean
   onChange: (e: any) => void
   className?: string
   color?: string
-  type: 'switch' | 'checkbox'
+  type?: 'switch' | 'checkbox'
 }
 
-export class Switch extends React.Component<SwitchProps, {checked: boolean}> {
+class SwitchH5 extends React.Component<SwitchProps, {checked: boolean}> {
   constructor(props: SwitchProps) {
     super(props);
     this.state = {
@@ -41,7 +42,7 @@ export class Switch extends React.Component<SwitchProps, {checked: boolean}> {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.hasOwnProperty('checked')) {
+    if (Object.prototype.hasOwnProperty.call(nextProps, 'checked')) {
       this.setState({
         checked: nextProps.checked,
       });
@@ -51,6 +52,7 @@ export class Switch extends React.Component<SwitchProps, {checked: boolean}> {
   render() {
     const { type = 'switch', className, color } = this.props;
     const cls = classNames(
+      'iotp-switch',
       {
         [`weui-${parseType(type)}`]: true,
       },
@@ -77,3 +79,6 @@ export class Switch extends React.Component<SwitchProps, {checked: boolean}> {
     );
   }
 }
+
+
+export { SwitchH5 as Switch };

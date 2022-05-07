@@ -8,15 +8,14 @@ interface DisplayPanelProps extends StyledProps {
   name: string;
 }
 
-export function DisplayPanel(props: DisplayPanelProps) {
-  const {
-    name,
-    value,
-    className,
-    style,
-  } = props;
+export function DisplayPanel({
+  name,
+  value,
+  className,
+  style,
+}: DisplayPanelProps) {
   return (
-    <div className={classNames('iotp-display-panel', className)} style={style} >
+    <div className={classNames('iotp-display-panel', className)} style={style}>
       <div className="display-name">{name}</div>
       <div className="display-value">{value}</div>
     </div>

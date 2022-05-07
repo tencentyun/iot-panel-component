@@ -2,15 +2,10 @@ import React, { useEffect, useMemo, useRef, useState, useCallback } from 'react'
 import { noop, getFloatDigit } from '../utils';
 import './index.less';
 import classNames from 'classnames';
-import { Icon } from '../components/Icon';
-import { TemplatePropertyConfig } from '../interface';
+import { Icon, Slider } from '../components';
+import { StyledProps, TemplatePropertyConfig } from '../interface';
 
-const { Slider }
-  = process.env.TARO_ENV === 'weapp'
-  ? require('@tarojs/components')
-  : require('../components/slider');
-
-export interface NumberSliderProps {
+export interface NumberSliderProps extends StyledProps {
   /**
    * @description 可以提供unit, name等信息
    */
@@ -48,6 +43,8 @@ export function NumberSlider({
   min = 0,
   max = 0,
   step = 0,
+  style,
+  className,
 }: NumberSliderProps) {
   let {
     name,
@@ -88,9 +85,10 @@ export function NumberSlider({
 
   return (
     <div
-      className={classNames('iotp-number-slide', {
+      className={classNames('iotp-number-slide', className, {
         disabled: disabled,
       })}
+      style={style}
     >
       <div className="slid-inner">
         <div className="iotp-slid-title">

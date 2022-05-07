@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "module": "commonjs",
+    "target": "es5",
+//    "module": "commonjs",
     "removeComments": false,
     "preserveConstEnums": true,
     "moduleResolution": "node",
@@ -14,10 +14,8 @@
     "noUnusedParameters": true,
     "strictNullChecks": true,
     "sourceMap": true,
-    "baseUrl": "./",
-    "paths": {"@src/*": ["./src/*"]},
     "rootDir": "./src",
-    "jsx": "react-jsx",
+    "jsx": "react",
     "allowJs": true,
     "resolveJsonModule": true,
     "typeRoots": [

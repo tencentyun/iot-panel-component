@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { EnumBtnProps } from '../EnumBtn';
 import { noop } from '../utils';
-import { Modal } from '../components/Modal';
-import { Hoverable } from '../components/Hoverable';
-import { Card } from '../components/Card';
+import { ScrollView, Card, Hoverable, Modal } from '../components';
 import { TemplatePropertyConfig } from '../interface';
 import './index.less';
-
-const { ScrollView } = process.env.TARO_ENV === 'weapp' ? require('@tarojs/components') : require('../components/scroll-view');
+import { PopupContainer } from '../utils/renderPortal';
 
 export interface EnumPopupProps<T> extends EnumBtnProps<T> {
   onClose?: () => void;
@@ -16,7 +13,7 @@ export interface EnumPopupProps<T> extends EnumBtnProps<T> {
   /**
    * @description 挂载弹窗内容的节点，仅支持 web 端
    */
-  popupContainer?: Element;
+  popupContainer?: PopupContainer;
 }
 
 export function EnumPopup<T>({
@@ -26,9 +23,11 @@ export function EnumPopup<T>({
   icon,
   value,
   title,
+  style,
+  className,
   onChange = noop,
   onClose = noop,
-  disabled = false,
+  disabled = false
 }: EnumPopupProps<T>) {
   const {
     name,
@@ -37,6 +36,10 @@ export function EnumPopup<T>({
   const [localValue, setLocalValue] = useState(value);
   const [visible, setVisible] = useState(false);
 
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
+
   return <>
     <Card
       icon={icon}
@@ -44,59 +47,58 @@ export function EnumPopup<T>({
       desc={enumList.find((item) => item.value === value)?.text}
       onClick={() => setVisible(!visible)}
       disabled={disabled}
-      className="iotp-enum-popup"
+      className={classNames('iotp-enum-popup', className)}
+      style={style}
     />
     {Boolean(visible) && (
-    <Modal
-      className="iotp-enum-modal"
-      visible={visible}
-      fixedBottom={true}
-      onClose={() => setVisible(false)}
-      title={name}
-      showBackBtn={false}
-      popupContainer={popupContainer}
-    >
-      <Modal.Body>
-        <ScrollView scrollY={true}>
-          <div className="checkbox-group type-radio" >
-            {enumList.map((item) => (
-              <Hoverable
-                key={item.text}
-                className={classNames('checkbox-item need-hover', {
-                  actived: item.value === localValue,
-                })}
-                hoverClass='hover'
-                onClick={() => setLocalValue(item.value)}
-              >
-                <div className="checkbox-container">
-                  <div className={classNames('checkbox-icon', { checked: item.value === localValue  })} />
-                </div>
-                <div className="checkbox-item-text text-overflow">
-                  {item.text}
-                </div>
-              </Hoverable>
-            ))}
-          </div>
-        </ScrollView>
-      </Modal.Body>
-      <Modal.Footer>
-        <Modal.FooterConfirmBtnGroup
-          confirmText="确定"
-          cancelText="取消"
-          cancelBtnType="cancel"
-          isInFixedBottomModal={true}
-          onConfirm={() => {
-            setVisible(false);
-            onChange(localValue);
-            onClose();
-          }}
-          onCancel={() => {
-            setVisible(false);
-            onClose();
-          }}
-        />
-      </Modal.Footer>
-    </Modal>
+      <Modal
+        className="iotp-enum-modal"
+        visible={visible}
+        fixedBottom={true}
+        onClose={() => setVisible(false)}
+        title={name}
+        popupContainer={popupContainer}
+      >
+        <Modal.Body>
+          <ScrollView scrollY={true}>
+            <div className="checkbox-group type-radio">
+              {enumList.map((item) => (
+                <Hoverable
+                  key={item.text}
+                  className={classNames('checkbox-item', {
+                    actived: item.value === localValue,
+                  })}
+                  onClick={() => setLocalValue(item.value)}
+                >
+                  <div className="checkbox-container">
+                    <div className={classNames('checkbox-icon', { checked: item.value === localValue })}/>
+                  </div>
+                  <div className="checkbox-item-text text-overflow">
+                    {item.text}
+                  </div>
+                </Hoverable>
+              ))}
+            </div>
+          </ScrollView>
+        </Modal.Body>
+        <Modal.Footer>
+          <Modal.FooterConfirmBtnGroup
+            confirmText="确定"
+            cancelText="取消"
+            cancelBtnType="cancel"
+            isInFixedBottomModal={true}
+            onConfirm={() => {
+              setVisible(false);
+              onChange(localValue);
+              onClose();
+            }}
+            onCancel={() => {
+              setVisible(false);
+              onClose();
+            }}
+          />
+        </Modal.Footer>
+      </Modal>
     )}
   </>;
 }

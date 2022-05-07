@@ -1,25 +1,38 @@
 /* eslint-disable react/display-name */
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { noop } from '../../utils';
-import { Hoverable } from '../Hoverable';
-import { ConfirmBtnGroup, ConfirmBtnGroupProps } from "../Btn";
+import { ConfirmBtnGroup, ConfirmBtnGroupProps } from '../Btn';
 import './Modal.less';
 import { StyledProps } from '../../interface';
+import { show, confirm, alert, showModal } from './ModalShow';
+import { PopupContainer, renderPortal } from '../../utils/renderPortal';
+
 export interface ModalProps extends StyledProps {
+  /**
+   * @description 弹窗是否显示
+   */
   visible: boolean;
+  /**
+   * @description 弹窗的标题
+   */
   title?: string | React.ReactNode;
+  /**
+   * @description 触发关闭操作时的回调函数
+   */
   onClose?: () => any;
   maskClosable?: boolean;
+  /**
+   * @description 弹窗展示时是否吸底
+   */
   fixedBottom?: boolean;
   children?: React.ReactNode;
   containerClassName?: string;
-  showBackBtn?: boolean;
   /**
    * @description 组件挂载节点，仅支持 web 端
    */
-  popupContainer?: Element;
+  popupContainer?: PopupContainer;
+  onUnmount?: () => any;
 }
 
 export function Modal({
@@ -32,19 +45,12 @@ export function Modal({
   className,
   containerClassName,
   style,
-  showBackBtn = false,
   popupContainer,
+  onUnmount,
 }: ModalProps) {
-  const renderWithPortal = (reactNode) => {
-    if (process.env.TARO_ENV === 'weapp') {
-      return reactNode;
-    }
-    return HTMLElement && (popupContainer instanceof HTMLElement)
-      ? ReactDOM.createPortal(reactNode, popupContainer)
-      : reactNode;
-  };
+  useEffect(() => () => typeof onUnmount === 'function' && onUnmount(), []);
 
-  return renderWithPortal((
+  return renderPortal((
     <div
       className={classNames(
         'modal-container',
@@ -70,24 +76,13 @@ export function Modal({
       >
         {title && (
           <div className='modal-header'>
-            {showBackBtn && (
-              <Hoverable
-                className='back-btn need-hover'
-                hoverClass='hover'
-                onClick={onClose}
-              >
-                <img
-                  className='back-btn-icon'
-                />
-              </Hoverable>
-            )}
             <div className='modal-title'>{title}</div>
           </div>
         )}
         {children}
       </div>
     </div>
-  ));
+  ), popupContainer);
 }
 
 Modal.Body = ({ children }) => (
@@ -114,8 +109,6 @@ Modal.Footer = ({
 };
 
 export interface FooterConfirmBtnGroup extends ConfirmBtnGroupProps {
-  confirmColor?: string;
-  cancelColor?: string;
   isInFixedBottomModal?: boolean;
   noBorder?: boolean;
   btnSize?: number;
@@ -129,18 +122,18 @@ Modal.FooterConfirmBtnGroup = ({
   onCancel,
   onConfirm,
   confirmText,
-  confirmColor = '#0066ff',
-  confirmBtnType,
+  confirmColor,
+  confirmBtnType = 'primary',
   confirmBtnDisabled,
   cancelText,
   cancelBtnDisabled,
-  cancelColor = '#6c7078',
-  cancelBtnType,
+  cancelColor,
+  cancelBtnType = 'cancel',
   isInFixedBottomModal,
   noBorder,
-  btnSize = 32,
+  // 移除btnSize，因为h5无法用rpx单位，可能会导致两端表现不一致，这里固定样式即可
+  // btnSize = 32,
 }: FooterConfirmBtnGroup) => {
-
   const renderContent = () => {
     if (isInFixedBottomModal) {
       return (
@@ -149,9 +142,11 @@ Modal.FooterConfirmBtnGroup = ({
             onCancel,
             onConfirm,
             confirmText,
+            confirmColor,
             confirmBtnType,
             confirmBtnDisabled,
             cancelText,
+            cancelColor,
             cancelBtnType,
             cancelBtnDisabled,
           }}
@@ -163,11 +158,11 @@ Modal.FooterConfirmBtnGroup = ({
       <div className='footer-confirm-btn-group'>
         {!!cancelText && (
           <Modal.FooterBtn
+            className={classNames(`btn-type-${cancelBtnType}`)}
             noBorder={noBorder}
             onClick={onCancel}
             style={{
               color: cancelColor,
-              fontSize: `${btnSize}rpx`
             }}
           >
             {cancelText}
@@ -175,11 +170,11 @@ Modal.FooterConfirmBtnGroup = ({
         )}
         {!!confirmText && (
           <Modal.FooterBtn
+            className={classNames(`btn-type-${confirmBtnType}`)}
             noBorder={noBorder}
             onClick={onConfirm}
             style={{
               color: confirmColor,
-              fontSize: `${btnSize}rpx`
             }}
           >
             {confirmText}
@@ -222,3 +217,8 @@ Modal.Message = ({ message }) => (
     {message}
   </div>
 );
+
+Modal.show = show;
+Modal.showModal = showModal;
+Modal.confirm = confirm;
+Modal.alert = alert;

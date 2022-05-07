@@ -3,32 +3,19 @@ import React from 'react';
 import settingImg from '../images/setting.svg';
 import settingActivedImg from '../images/setting_actived.svg';
 import './index.less';
-
-declare interface StyledProps {
-  /**
-   * 组件自定义类名
-   */
-  className?: string;
-
-  /**
-   * 组件自定义样式
-   */
-  style?: React.CSSProperties;
-}
+import { StyledProps } from '../../interface';
 
 export interface DefaultIconProps extends StyledProps {
   actived?: boolean;
   size?: number;
 }
 
-export function DefaultIcon(props: DefaultIconProps) {
-  const {
-    actived,
-    size = 24,
-    className = '',
-    style = {},
-  } = props;
-
+export function DefaultIcon({
+  actived,
+  size = 24,
+  className = '',
+  style = {},
+}: DefaultIconProps = {}) {
   return (
     <div
       style={{

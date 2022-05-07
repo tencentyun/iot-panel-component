@@ -9,6 +9,8 @@ export function EnumSlider<T>({
   value: outerValue,
   onChange = noop,
   disabled,
+  className,
+  style,
 }: EnumBtnProps<T>) {
   const size = useMemo(() => ({
     textWidth: 100,
@@ -38,7 +40,7 @@ export function EnumSlider<T>({
     ...options,
   ], [options]);
 
-  const [state, setState] = useState<{offsetLeft: number, offsetTransition: boolean, currentValue: T}>({
+  const [state, setState] = useState<{ offsetLeft: number, offsetTransition: boolean, currentValue: T }>({
     offsetLeft: 0,
     offsetTransition: false,
     currentValue: null as any,
@@ -100,7 +102,7 @@ export function EnumSlider<T>({
 
   const handleTouchStart = (e) => {
     e.preventDefault();
-    if (outerValue !== value) {
+    if (disabled || outerValue !== value) {
       return;
     }
     stateRef.current.dragging = true;
@@ -135,7 +137,10 @@ export function EnumSlider<T>({
   };
 
   return (
-    <div className={classNames('scene-slider', 'iotp-enum-slider')}>
+    <div
+      className={classNames('scene-slider', 'iotp-enum-slider', className, { disabled })}
+      style={style}
+    >
       <div
         className='scene-slider-container'
         onTouchStart={handleTouchStart}
