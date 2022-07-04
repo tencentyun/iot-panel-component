@@ -88,7 +88,7 @@ export function EnumSlider<T>({
     stateRef.current.originalIndex = originalIndex;
     setState({
       offsetTransition: false,
-      currentValue: options[currentIndex].value,
+      currentValue: options[currentIndex]?.value,
       offsetLeft,
     });
   };
@@ -102,7 +102,7 @@ export function EnumSlider<T>({
 
   const handleTouchStart = (e) => {
     e.preventDefault();
-    if (disabled || outerValue !== value) {
+    if (disabled || outerValue !== value || options.length === 0) {
       return;
     }
     stateRef.current.dragging = true;
