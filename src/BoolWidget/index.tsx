@@ -10,12 +10,18 @@ interface BoolWidgetProps extends StyledProps {
    * @description 控制switch的颜色
    */
   switchColor?: string;
-  /**
-   * @default 'normal'
-   * @description 控制组件的长度
-   */
+  // /**
+  //  * @default 'normal'
+  //  * @description 控制组件的长度
+  //  */
   // size?: 'small' | 'normal',
+  /**
+   * @description 开关
+   */
   value: boolean;
+  /**
+   * @description 标题
+   */
   title?: string | JSX.Element;
   /**
    * @description 副标题
