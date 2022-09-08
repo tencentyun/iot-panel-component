@@ -18,6 +18,12 @@ export interface HoverableProps<P extends keyof JSX.IntrinsicElements>
 
   // hover 时向标签增加的 className，默认为 hover
   hoverClass?: string;
+
+  // 小程序View独有
+  // 按住后多久出现点击态，单位毫秒
+  hoverStartTime?: number;
+  // 手指松开后点击态保留时间，单位毫秒
+  hoverStayTime?: number;
 }
 
 export type HoverablePropsType<P extends keyof JSX.IntrinsicElements> = JSX.IntrinsicElements[P] & HoverableProps<P>;
@@ -31,6 +37,8 @@ export const Hoverable = forwardRef(function Hoverable<P extends keyof JSX.Intri
     className,
     disabled,
     hoverClass = 'hover',
+    hoverStartTime = 20,
+    hoverStayTime = 70,
     // 避免传进来的onTouchStart等被覆盖
     onTouchStart,
     onTouchMove,
@@ -38,7 +46,7 @@ export const Hoverable = forwardRef(function Hoverable<P extends keyof JSX.Intri
     onClick,
     ...htmlProps
   }: HoverablePropsType<P>,
-  ref: Ref<JSX.IntrinsicElements[P]>
+  ref: Ref<JSX.IntrinsicElements[P]>,
 ) {
   const [hover, setHover] = useState(false);
 
@@ -72,11 +80,13 @@ export const Hoverable = forwardRef(function Hoverable<P extends keyof JSX.Intri
 
   if (isTaro) {
     props.hoverClass = hoverClass;
+    props.hoverStartTime = hoverStartTime;
+    props.hoverStayTime = hoverStayTime;
   }
 
   return React.createElement(
     parent,
     props,
-    children
+    children,
   );
 });
