@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-const version = process.argv[2];
+const version = process.argv[2].split('/').pop();
 const path = require('path');
 const fs = require('fs');
 console.log(version);
