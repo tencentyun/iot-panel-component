@@ -8,7 +8,7 @@ import { Cell, Icon } from 'qcloud-iot-panel-component';
 export default () => {
   return (
     <div 
-      style={{padding: 32}}
+      style={{padding: 16}}
     >
       <Cell
         title="数字密码1"
@@ -53,4 +53,4 @@ export default () => {
 }
 ```
 
-<API src="../../src/components/Card/Card.tsx"></API>
+<API src="../../src/components/Cell/Cell.tsx"></API>

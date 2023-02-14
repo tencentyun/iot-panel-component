@@ -11,9 +11,17 @@ import './Cell.less';
 interface CellProps extends StyledProps {
   title?: ReactNode
   icon?: string
-  body?: ReactNode
+  /**
+   * footer展示的内容
+   */
   footer?: ReactNode
+  /**
+   * 副标题
+   */
   subTitle?: ReactNode
+  /**
+   * @description 是否显示尾部箭头
+   */
   showArrow?: boolean
   onClick?: () => void;
 }
