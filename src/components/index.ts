@@ -8,3 +8,4 @@ export * from './Card';
 export * from './Hoverable';
 export * from './Tips';
 export * from './IconBtn';
+export * from './Cell';

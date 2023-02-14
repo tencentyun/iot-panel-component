@@ -1,0 +1,35 @@
+@import '../../_style/base.less';
+@import '../../_style/var.less';
+
+.@{prefixCls}-cell {
+  background: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &-inner:not(:first-of-type){
+    position: relative;
+    &:before{
+      content: '';
+      display: block;
+      height: 1px;
+      transform: scaleY(0.5);
+      background: #E5E5E5;
+      position: absolute;
+      width: calc(100% - 32px);
+      top: 0;
+    }
+  }
+  &-title{
+    color: #15161A;
+    font-size: 16px;
+  }
+  &-subtitle{
+    color: #A2A7B1;
+    font-size: 12px;
+  }
+  &-hd{
+    width: 80%;
+  }
+}
