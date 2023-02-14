@@ -1,0 +1,29 @@
+@import "../_style/var.less";
+
+.@{prefixCls}-battery{
+  --border-color: rgba(41,43,47, 0.3);
+  border: 1.6px solid var(--border-color);
+  padding: 2px;
+  position: relative;
+  width: 32px;
+  height: 20px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  &-percent{
+    background: rgb(41,43,47);
+    height: 100%;
+    border-radius: 2px;
+  }
+  &:after{
+    content: '';
+    display: block;
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 8px;
+    border-radius: 0 8px 8px 0;
+    background-color: var(--border-color);
+  }
+}

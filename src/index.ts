@@ -1,4 +1,5 @@
 export * from './BoolWidget';
+export * from './Battery';
 export * from './DisplayPanel';
 export * from './EnumBtn';
 export * from './EnumSlider';
