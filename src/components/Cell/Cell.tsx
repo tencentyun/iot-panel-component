@@ -34,14 +34,13 @@ export function Cell({
       style={style}
       onClick={onClick}
     >
+    {icon && (<Icon
+        size={24}
+        icon={icon}
+      />)
+    }
     <div className="iotp-cell-hd">
-
       {title && <div className="iotp-cell-title">
-        {icon && (<Icon
-          size={24}
-          icon={icon}
-        />)
-        }
         {title}</div>
       }
       {subTitle && <div className="iotp-cell-subtitle">{subTitle}</div>}

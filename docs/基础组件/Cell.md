@@ -2,11 +2,10 @@
 
 ```jsx
 import React, {useState} from 'react';
-import { Cell } from 'qcloud-iot-panel-component';
+import { Cell, Icon } from 'qcloud-iot-panel-component';
 
 
 export default () => {
-  const [visible,  setVisible] = useState(false);
   return (
     <div 
       style={{padding: 32}}
@@ -15,9 +14,18 @@ export default () => {
         title="数字密码1"
         subTitle="2022.10.21"
       />
-      <Cell
+      <Cell 
+        style={{marginTop: 10}}
+        icon="trash"
         title="数字密码2"
-        subTitle="2022.10.21"
+        footer="去查看"
+        showArrow
+      />
+      <Cell
+        style={{marginTop: 10}}
+        icon="trash"
+        title="数字密码2"
+        footer={<Icon icon="bicycle"/>}
         showArrow
       />
       <Cell.Group
@@ -25,13 +33,19 @@ export default () => {
         style={{marginTop: 30}}
       >
         <Cell
-          title="数字密码2"
+          title="数字密码1"
           subTitle="2022.10.21"
           showArrow
         />
         <Cell
           title="数字密码2"
           subTitle="2022.10.21"
+          showArrow
+        />
+        <Cell
+          title="数字密码3"
+          subTitle="2022.10.21"
+          showArrow
         />
       </Cell.Group>
     </div>

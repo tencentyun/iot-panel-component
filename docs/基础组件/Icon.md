@@ -1,5 +1,7 @@
 ## Icon
 
+对 [ionicons v4](https://ionic.io/ionicons/v4) 的简单封装
+
 ```jsx
 import React, {useState} from 'react';
 import { Icon } from 'qcloud-iot-panel-component';
