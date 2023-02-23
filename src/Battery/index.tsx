@@ -11,24 +11,32 @@ interface BatteryProps extends StyledProps {
   /**
    * @description 电池颜色
    */
-  color: string;
+  color?: string;
+  /**
+   * @description 是否显示百分比
+   */
+  showLabel?: boolean;
 }
 
 export function Battery({
   value = 0,
   color = '#292B2F',
   className,
+  showLabel = false,
   style
 }: BatteryProps) {
   const percent = value > 100 ? 100 : value;
   return (
-    <div className={classNames('iotp-battery', className)} style={style}>
-      <div className="iotp-battery-percent"
-        style={{
-          width: value <= 1 ? `${percent * 100}%` : `${percent}%`,
-          backgroundColor: color
-        }}
-      ></div>
+    <div className={classNames('iotp-battery-wrapper', className)} style={style}>
+      <div className="iotp-battery">
+        <div className="iotp-battery-percent"
+          style={{
+            width: value <= 1 ? `${percent * 100}%` : `${percent}%`,
+            backgroundColor: color
+          }}
+        ></div>
+      </div>
+      {showLabel && <span className='battery-label'>{value}%</span>}
     </div>
   );
 }

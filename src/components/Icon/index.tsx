@@ -19,6 +19,7 @@ export interface IconProps extends StyledProps {
   size?: number;
   colorTheme?: ThemeColorType;
   style?: React.CSSProperties
+  theme?: 'ios' | 'md'
   [propKey: string]: any;
 }
 

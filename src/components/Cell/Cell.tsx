@@ -10,7 +10,10 @@ import './Cell.less';
 
 interface CellProps extends StyledProps {
   title?: ReactNode
-  icon?: string
+  /**
+   * 如果传string，会将icon传入<Icon />组件，否则认为是ReactNode
+   */
+  icon?: ReactNode
   /**
    * footer展示的内容
    */
@@ -42,10 +45,10 @@ export function Cell({
       style={style}
       onClick={onClick}
     >
-    {icon && (<Icon
+    {typeof icon === 'string' ? (<Icon
         size={24}
         icon={icon}
-      />)
+      /> ): icon
     }
     <div className="iotp-cell-hd">
       {title && <div className="iotp-cell-title">

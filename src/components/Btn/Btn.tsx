@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { StyledProps } from '../../interface';
 import { Hoverable } from '../Hoverable';
+import { Icon } from '../Icon';
 import './Btn.less';
 
 export interface BtnOptions extends StyledProps {
@@ -35,8 +36,8 @@ export function Btn({
     return (
       <>
         {icon && (
-          <img
-            src={icon}
+          <Icon
+            icon={icon}
             className='btn-icon'
           />
         )}
