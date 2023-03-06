@@ -22,12 +22,12 @@
     opacity: 0;
     box-sizing: content-box;
   }
-  &:active::before{
+  &.clickable:active::before{
     opacity: 0.08;
   }
   &-inner:not(:first-of-type){
     position: relative;
-    &:before{
+    &:after{
       content: '';
       opacity: 1;
       display: block;
@@ -43,6 +43,7 @@
   &-title{
     color: #15161A;
     font-size: 16px;
+    white-space: nowrap;
   }
   &-subtitle{
     color: #A2A7B1;
@@ -54,6 +55,7 @@
   }
   &-ft{
     display: flex;
+    font-size: 16px;
     align-items: center;
   }
 }

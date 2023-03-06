@@ -41,7 +41,7 @@ export function Cell({
 }: CellProps) {
   const { isInGroup } =  useContext(GroupContext);
   return (<div
-      className={classNames('iotp-cell', className, {'iotp-cell-inner': isInGroup})}
+      className={classNames('iotp-cell', className, {'iotp-cell-inner': isInGroup, 'clickable': showArrow})}
       style={style}
       onClick={onClick}
     >
