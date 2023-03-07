@@ -1,6 +1,6 @@
 {
   "name": "qcloud-iot-panel-component",
-  "version": "1.0.2",
+  "version": "1.1.0-beta",
   "description": "腾讯连连开发面板组件",
   "main": "lib/index.js",
   "browser": "h5/index.js",

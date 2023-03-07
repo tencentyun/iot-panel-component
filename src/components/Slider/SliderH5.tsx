@@ -260,7 +260,7 @@ class SliderH5 extends React.Component<SliderProps, SliderState> {
       marginLeft: `-${Math.floor(_blockSize / 2)}px`,
     };
     return (
-      <div className={cls} {...omit(restProps, ['onChanging'])} >
+      <div className={cls} {...omit(restProps, ['onChanging', 'onChange'])} >
         <div className='weui-slider'>
           <div className='weui-slider__inner' style={innerStyles} ref={c => (this.sliderInsRef = c)}>
             <div style={trackStyles} className='weui-slider__track'/>
