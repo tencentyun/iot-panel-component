@@ -1,0 +1,34 @@
+@import "../_style/var.less";
+
+.@{prefixCls}-battery{
+  --border-color: rgba(41,43,47, 0.3);
+  border: 1.6px solid var(--border-color);
+  margin-right: 6px;
+  padding: 1px;
+  position: relative;
+  width: 16px;
+  height: 10px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  &-wrapper{
+    display: inline-flex;
+    align-items: center;
+  }
+  &-percent{
+    background: rgb(41,43,47);
+    height: 100%;
+    border-radius: 1px;
+  }
+  &:after{
+    content: '';
+    display: block;
+    position: absolute;
+    right: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 4px;
+    border-radius: 0 4px 4px 0;
+    background-color: var(--border-color);
+  }
+}

@@ -8,6 +8,7 @@ import { StyledProps } from '../../interface';
 export interface DefaultIconProps extends StyledProps {
   actived?: boolean;
   size?: number;
+  [key: string]: any;
 }
 
 export function DefaultIcon({

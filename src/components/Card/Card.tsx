@@ -11,7 +11,7 @@ export interface CardProps extends StyledProps {
   title?: string | JSX.Element;
   subtitle?: string | JSX.Element;
   desc?: string | JSX.Element;
-  icon?: string;
+  icon?: React.ReactNode;
   direction?: 'row' | 'column';
   onClick?: () => void,
   disabled?: boolean;
@@ -47,14 +47,17 @@ export function Card({
 
     return (
       <>
-        {Boolean(icon) && (
-          <div className="iotp-card__icon">
-            <Icon
+        {
+         Boolean(icon) && typeof icon === 'string' ? (
+           <div className="iotp-card__icon">
+             <Icon
               size={24}
               icon={icon}
             />
-          </div>
-        )}
+           </div>
+         ) : (
+          icon
+         )}
         <div className="iotp-card__title">
           {title}
           {Boolean(subtitle) && (
@@ -63,7 +66,7 @@ export function Card({
         </div>
         <div className="iotp-card__desc">
           {desc}
-          {clickable && <span className="iotp-card__ft"/>}
+          {clickable && <span className="iotp-arrow"/>}
         </div>
       </>
     );

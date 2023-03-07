@@ -15,7 +15,7 @@ function parseType(type) {
 interface SwitchProps {
   checked: boolean
   disabled?: boolean
-  onChange: (e: any) => void
+  onChange: (e: { detail: { value: boolean }}) => void
   className?: string
   color?: string
   type?: 'switch' | 'checkbox'
