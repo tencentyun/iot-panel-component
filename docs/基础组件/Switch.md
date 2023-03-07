@@ -9,7 +9,7 @@ export default () => (
   <div style={{width: 200}}>
     <h2>Switch</h2>
     <Switch disabled />
-    <Switch />
+    <Switch onChange={console.log}/>
     <Switch disabled checked />
     <Switch checked />
   </div>

@@ -9,6 +9,7 @@ export default () => (
   <div style={{width: 200}}>
     <h2>基础组件 Slider</h2>
     <Slider step={2} min={0} max={100} />
+    <Slider step={2} min={0} max={200} onChange={console.log}/>
   </div>
 )
 ```

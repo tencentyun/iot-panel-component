@@ -62,7 +62,7 @@ interface SliderProps {
   min: number
   step: number
   disabled?: boolean
-  onChange?: (e: any) => void
+  onChange?: (e: { detail: { value: number }}) => void
   onChanging?: (e: any) => void
   name?: string,
   className?: string,
@@ -211,7 +211,6 @@ class SliderH5 extends React.Component<SliderProps, SliderState> {
       Object.defineProperty(e, 'detail', {
         enumerable: true,
         value: {
-          detail: e.detail,
           value: this.state.value,
         },
       });
